@@ -31,6 +31,8 @@ List lengths: 100,
 
 The algorithm runs in quadratic time as the list length increases. Selection sort is the quickest and bubble sort is the slowest.
 
+#pagebreak()
+
 = Experiment 2
 
 List lengths: 100,
@@ -55,13 +57,12 @@ List lengths: 100,
 
 \# of runs: 10
 
-#figure(
-  image("exp2_bubble_graph.png"),
-  caption: [normal vs. optomized bubble sort],
+#figure(image("exp2_bubble_graph.png", width: 75%)),
+caption: [normal vs. optomized bubble sort],
 )
 
 #figure(
-  image("exp2_selection_graph.png"),
+  image("exp2_selection_graph.png", width: 75%),
   caption: [normal vs. optomized selection sort],
 )
 
