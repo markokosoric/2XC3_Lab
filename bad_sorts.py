@@ -70,6 +70,25 @@ def bubble_sort(L):
             if L[j] > L[j+1]:
                 swap(L, j, j+1)
 
+# This is the optimization
+def bubble_sort2(L):
+    n = len(L)
+
+    for end in range(n - 1, 0, -1):
+        max_val = L[0]
+
+        for i in range(1, end + 1):
+            if L[i] < max_val:
+                L[i - 1] = L[i]
+            else:
+                L[i - 1] = max_val
+                max_val = L[i]
+
+        
+        L[end] = max_val
+
+                   
+
 
 # ******************* Selection sort code *******************
 
@@ -86,3 +105,26 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
+
+# Optimized Selection sort
+
+def selection_sort2(L):
+    for i in range(len(L) // 2):
+        min_index, max_index = find_min_max_index2(L, i)
+        swap(L, i, min_index)
+        
+        if max_index == i:
+            max_index = min_index
+
+        swap(L, len(L) - i - 1, max_index)
+
+
+def find_min_max_index2(L, n):
+    min_index = n
+    max_index = n
+    for i in range(n+1, len(L)-n):
+        if L[i] < L[min_index]:
+            min_index = i
+        if L[i] > L[max_index]:
+            max_index = i
+    return (min_index, max_index)

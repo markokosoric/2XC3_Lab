@@ -70,3 +70,74 @@ def exp1():
 
     plt.show()
 
+def exp2_bubble():
+    lengths = [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+    ]
+
+    b_data_orig = bench_algo(bad_sorts.bubble_sort, lengths, 2000000, 10);
+    b_data_opt = bench_algo(bad_sorts.bubble_sort2, lengths, 2000000, 10);
+    print("normal bubble sort: ", b_data_orig);
+    print("optimized bubble sort: ", b_data_opt);
+    plt.plot(lengths, b_data_orig, color='red')
+    plt.plot(lengths, b_data_opt, color='green')
+    plt.legend(['normal bubble sort', 'optimized bubble sort'])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()
+
+def exp2_selection():
+    lengths = [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+    ]
+
+    s_data_orig = bench_algo(bad_sorts.selection_sort, lengths, 2000000, 10);
+    s_data_opt = bench_algo(bad_sorts.selection_sort2, lengths, 2000000, 10);
+    print("normal selection sort: ", s_data_orig);
+    print("optimized selection sort: ", s_data_opt);
+    plt.plot(lengths, s_data_orig, color='red')
+    plt.plot(lengths, s_data_opt, color='green')
+    plt.legend(['normal selection sort', 'optimized selection sort'])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()
