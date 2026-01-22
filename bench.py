@@ -31,6 +31,21 @@ def bench_algo(sort, lengths: list[int], max_val: int, n: int) -> list[int]:
         data.append(time);
     return data;
 
+def bench_algo_almost_sorted(
+        sort,
+        length: int,
+        max_val: int,
+        swaps: list[int],
+        n: int
+) -> list[int]:
+    data = [];
+    bench = Bench(sort);
+    for s in swaps:
+        L = bad_sorts.create_near_sorted_list(length, max_val, s)
+        time = bench.bench(L, n)
+        data.append(time);
+    return data;
+
 def exp1():
     lengths = [
         100,
@@ -141,3 +156,39 @@ def exp2_selection():
     plt.ylabel('time (s)')
 
     plt.show()
+
+def exp3():
+    length = 5000;
+    swaps = [
+        0,
+        1000,
+        2000,
+        3000,
+        4000,
+        5000,
+        6000,
+        7000,
+        8000,
+        9000,
+        10000,
+    ];
+
+    i_data = bench_algo_almost_sorted(bad_sorts.insertion_sort, length, 2000000, swaps, 10);
+    s_data = bench_algo_almost_sorted(bad_sorts.selection_sort, length, 2000000, swaps, 10);
+    b_data = bench_algo_almost_sorted(bad_sorts.bubble_sort, length, 2000000, swaps, 10);
+
+
+    print("insertion: ", i_data);
+    print("selection: ", s_data);
+    print("bubble: ", b_data);
+    plt.plot(swaps, i_data, color='red')
+    plt.plot(swaps, s_data, color='green')
+    plt.plot(swaps, b_data, color='blue')
+    plt.legend(['insertion_sort', 'selection_sort', 'bubble_sort'])
+
+    plt.xlabel('Number of swaps')
+    plt.ylabel('time (s)')
+
+    plt.show()
+
+exp3();

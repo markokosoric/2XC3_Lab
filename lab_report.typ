@@ -68,3 +68,16 @@ caption: [normal vs. optomized bubble sort],
 
 
 Both algorithms show a measurable speed up. Bubble sort had a big speed up while selection sort did not show a substantial speed up.
+
+= Experiment 3
+Each of the unoptimized sorting algorithms were tested with the same parameters.
+- Length of list: 5000
+- Number of runs: 10
+- Number of swaps: [ 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ]
+
+The results show that selection sort behaves the same regardless of how many
+swaps were performed. Bubble sort showed a small improvement when given a almost
+sorted list. Insertion sort showed a major improvement when given a amost sorted
+list.
+
+#image("exp3_graph.png")
