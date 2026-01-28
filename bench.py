@@ -54,6 +54,23 @@ def bench_algo_almost_sorted(
     data = [];
     bench = Bench(sort);
     for s in swaps:
+        time = 0;
+        for i in range(n):
+            L = bad_sorts.create_near_sorted_list(length, max_val, s)
+            time += bench.bench(L, 1)
+        data.append(time/n);
+    return data;
+
+def bench_algo_almost_sorted2(
+        sort,
+        length: int,
+        max_val: int,
+        swaps: list[int],
+        n: int
+) -> list[int]:
+    data = [];
+    bench = Bench(sort);
+    for s in swaps:
         L = bad_sorts.create_near_sorted_list(length, max_val, s)
         time = bench.bench(L, n)
         data.append(time);
