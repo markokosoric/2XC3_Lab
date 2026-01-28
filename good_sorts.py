@@ -68,6 +68,17 @@ def merge(left, right):
                 j += 1
     return L
 
+def mergesort2(L):
+    window = 1;
+    while window < len(L):
+        for i in range(0, len(L), window*2):
+            left = L[i:i + window];
+            right = L[i + window:i + 2*window];
+            s = merge(left, right);
+            for j in range(len(s)):
+                L[i+j] = s[j]
+        window *= 2;
+
 # *************************************
 
 # ************* Heap Sort *************
