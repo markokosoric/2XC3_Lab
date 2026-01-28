@@ -32,6 +32,18 @@ def bench_algo(sort, lengths: list[int], max_val: int, n: int) -> list[int]:
         data.append(time);
     return data;
 
+def bench_algo2(sort, lengths: list[int], max_val: int, n: int) -> list[int]:
+    data = [];
+    bench = Bench(sort);
+    for size in lengths:
+        time = 0;
+        for i in range(n):
+            L = bad_sorts.create_random_list(size, max_val)
+            time += bench.bench(L, 1)
+        data.append(time/n);
+    return data;
+
+
 def bench_algo_almost_sorted(
         sort,
         length: int,
