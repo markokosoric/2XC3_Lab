@@ -1,4 +1,5 @@
 import bad_sorts;
+import good_sorts;
 import copy;
 import math
 import random
@@ -191,4 +192,41 @@ def exp3():
 
     plt.show()
 
-exp3();
+def exp4():
+    lengths = [
+        1000,
+        2000,
+        3000,
+        4000,
+        5000,
+        6000,
+        7000,
+        8000,
+        9000,
+        10000,
+        11000,
+        12000,
+        13000,
+        14000,
+        15000,
+        16000,
+        17000,
+        18000,
+        19000,
+    ];
+    q_data = bench_algo(good_sorts.quicksort, lengths, 2000000, 10);
+    m_data = bench_algo(good_sorts.mergesort, lengths, 2000000, 10);
+    h_data = bench_algo(good_sorts.heapsort, lengths, 2000000, 10);
+
+    print("quicksort: ", q_data);
+    print("mergesort: ", m_data);
+    print("heapsort: ", h_data);
+    plt.plot(lengths, q_data, color='red')
+    plt.plot(lengths, m_data, color='green')
+    plt.plot(lengths, h_data, color='blue')
+    plt.legend(["quicksort", "mergesort", "heapsort"])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()

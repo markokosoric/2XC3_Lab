@@ -81,3 +81,12 @@ sorted list. Insertion sort showed a major improvement when given a amost sorted
 list.
 
 #image("exp3_graph.png")
+
+= Experiment 4
+Each of the good sorting algorithms were tested with the same parameters
+- Length of list: [ 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000 ]
+- Number of runs: 10 each
+
+Each of the good sorts showed a quasilinear time complexity. Heap sort takes the
+longest which is probably due to the overhead of creating a heap. Quicksort
+takes the shortest amount of time.
