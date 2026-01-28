@@ -8,6 +8,7 @@ import gc
 import time
 import matplotlib.pyplot as plt
 from typing import Iterable, Tuple, Dict
+import sys
 
 class Bench:
     def __init__(self, sort) -> None:
@@ -54,11 +55,9 @@ def bench_algo_almost_sorted(
     data = [];
     bench = Bench(sort);
     for s in swaps:
-        time = 0;
-        for i in range(n):
-            L = bad_sorts.create_near_sorted_list(length, max_val, s)
-            time += bench.bench(L, 1)
-        data.append(time/n);
+        L = bad_sorts.create_near_sorted_list(length, max_val, s)
+        time = bench.bench(L, n)
+        data.append(time);
     return data;
 
 def bench_algo_almost_sorted2(
@@ -71,9 +70,11 @@ def bench_algo_almost_sorted2(
     data = [];
     bench = Bench(sort);
     for s in swaps:
-        L = bad_sorts.create_near_sorted_list(length, max_val, s)
-        time = bench.bench(L, n)
-        data.append(time);
+        time = 0;
+        for i in range(n):
+            L = bad_sorts.create_near_sorted_list(length, max_val, s)
+            time += bench.bench(L, 1)
+        data.append(time/n);
     return data;
 
 def exp1():
@@ -259,3 +260,47 @@ def exp4():
     plt.ylabel('time (s)')
 
     plt.show()
+
+def exp5():
+    sys.setrecursionlimit(10000)
+    length = 2000;
+    swaps = [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+    ]
+
+    q_data = bench_algo_almost_sorted2(good_sorts.quicksort, length, 2000000, swaps, 100);
+    m_data = bench_algo_almost_sorted2(good_sorts.mergesort, length, 2000000, swaps, 100);
+    h_data = bench_algo_almost_sorted2(good_sorts.heapsort, length, 2000000, swaps, 100);
+
+
+    print("quicksort: ", q_data);
+    print("mergesort: ", m_data);
+    print("heapsort: ", h_data);
+    plt.plot(swaps, q_data, color='red')
+    plt.plot(swaps, m_data, color='green')
+    plt.plot(swaps, h_data, color='blue')
+    plt.legend(['quick_sort', 'merge_sort', 'heap_sort'])
+
+    plt.xlabel('Number of swaps')
+    plt.ylabel('time (s)')
+
+    plt.show()
+
+exp5()
