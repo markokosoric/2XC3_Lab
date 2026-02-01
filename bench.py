@@ -1,5 +1,6 @@
 import bad_sorts;
 import good_sorts;
+import test_sort
 import copy;
 import math
 import random
@@ -9,6 +10,7 @@ import time
 import matplotlib.pyplot as plt
 from typing import Iterable, Tuple, Dict
 import sys
+
 
 class Bench:
     def __init__(self, sort) -> None:
@@ -343,8 +345,57 @@ def exp7():
     plt.plot(lengths, m_data_iter, color='green')
     plt.legend(['recursive merge sort', 'iterative merge sort'])
 
+def exp6():
+    lengths = [
+        100,
+        1000,
+        2000,
+        5000,
+        10000,
+        20000,
+        30000,
+        40000,
+        80000,
+        160000,
+        200000,
+        500000
+    ]
+
+    q_data = bench_algo(good_sorts.quicksort, lengths, 2000000, 10);
+    dq_data = bench_algo(good_sorts.dual_quicksort, lengths, 2000000, 10);
+    print("normal quick sort: ", q_data);
+    print("dual quick sort: ", dq_data);
+    plt.plot(lengths, q_data, color='red')
+    plt.plot(lengths, dq_data, color='green')
+    plt.legend(['normal quick sort', 'dual quick sort'])
+
     plt.xlabel('size')
     plt.ylabel('time (s)')
 
     plt.show()
 
+
+def exp8():
+    lengths = [
+        i for i in range(41)
+    ]
+
+    q_data = bench_algo2(good_sorts.quicksort, lengths, 2000000, 10000);
+    m_data = bench_algo2(good_sorts.mergesort, lengths, 2000000, 10000);
+    i_data = bench_algo2(bad_sorts.insertion_sort, lengths, 2000000, 10000);
+
+    print("quick sort: ", q_data);
+    print("merge sort: ", m_data);
+    print("insertion sort: ", i_data);
+
+    plt.plot(lengths, q_data, color='red')
+    plt.plot(lengths, m_data, color='green')
+    plt.plot(lengths, i_data, color='blue')
+    plt.legend(['quick sort', 'merge sort', "insertion sort"])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()
+
+exp6()

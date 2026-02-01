@@ -9,6 +9,8 @@ In contains traditional implementations for:
 
 Author: Vincent Maccio
 """
+import math 
+import bad_sorts
 
 # ************ Quick Sort ************
 def quicksort(L):
@@ -31,6 +33,29 @@ def quicksort_copy(L):
 
 # *************************************
 
+# ************ Dual Quick Sort ************
+def dual_quicksort(L):
+    copy = dual_quicksort_copy(L)
+    for i in range(len(L)):
+        L[i] = copy[i]
+
+
+def dual_quicksort_copy(L):
+    if len(L) < 2:
+        return L
+    pivot1 = min(L[0], L[1])
+    pivot2 = max(L[0], L[1])
+    left, middle, right = [], [], []
+    for num in L[2:]:
+        if num < pivot1:
+            left.append(num)
+        elif num >= pivot2:
+            right.append(num)
+        else:
+            middle.append(num)
+    return dual_quicksort_copy(left) + [pivot1] + dual_quicksort_copy(middle) + [pivot2] + dual_quicksort_copy(right)
+
+# *************************************
 
 # ************ Merge Sort *************
 
