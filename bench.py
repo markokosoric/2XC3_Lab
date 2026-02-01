@@ -303,4 +303,48 @@ def exp5():
 
     plt.show()
 
-exp5()
+def exp7():
+    lengths = [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        3000,
+        4000,
+        5000,
+        6000,
+        7000,
+        8000,
+        9000,
+        10000,
+    ]
+
+    m_data_rec = bench_algo2(good_sorts.mergesort, lengths, 2000000, 100);
+    m_data_iter = bench_algo2(good_sorts.mergesort2, lengths, 2000000, 100);
+    print("recursive merge sort:", m_data_rec);
+    print("iterative merge sort:", m_data_iter);
+    plt.plot(lengths, m_data_rec, color='red')
+    plt.plot(lengths, m_data_iter, color='green')
+    plt.legend(['recursive merge sort', 'iterative merge sort'])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()
+

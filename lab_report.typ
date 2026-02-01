@@ -90,3 +90,15 @@ Each of the good sorting algorithms were tested with the same parameters
 Each of the good sorts showed a quasilinear time complexity. Heap sort takes the
 longest which is probably due to the overhead of creating a heap. Quicksort
 takes the shortest amount of time.
+
+= Experiment 7
+Recursive merge sort and iterative merge sort were tested with the following
+parameters
+- lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ]
+- Number of runs: 100 each
+#image("exp7_graph.png")
+
+
+The iterative merge sort was slightly more performant for small list sizes. The
+recursive variant is more performant with large list sizes.
+
