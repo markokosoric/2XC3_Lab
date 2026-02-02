@@ -305,6 +305,35 @@ def exp5():
 
     plt.show()
 
+def exp6():
+    lengths = [
+        100,
+        1000,
+        2000,
+        5000,
+        10000,
+        20000,
+        30000,
+        40000,
+        80000,
+        160000,
+        200000,
+        500000
+    ]
+
+    q_data = bench_algo(good_sorts.quicksort, lengths, 2000000, 10);
+    dq_data = bench_algo(good_sorts.dual_quicksort, lengths, 2000000, 10);
+    print("normal quick sort: ", q_data);
+    print("dual quick sort: ", dq_data);
+    plt.plot(lengths, q_data, color='red')
+    plt.plot(lengths, dq_data, color='green')
+    plt.legend(['normal quick sort', 'dual quick sort'])
+
+    plt.xlabel('size')
+    plt.ylabel('time (s)')
+
+    plt.show()
+
 def exp7():
     lengths = [
         100,
@@ -345,35 +374,6 @@ def exp7():
     plt.plot(lengths, m_data_iter, color='green')
     plt.legend(['recursive merge sort', 'iterative merge sort'])
 
-def exp6():
-    lengths = [
-        100,
-        1000,
-        2000,
-        5000,
-        10000,
-        20000,
-        30000,
-        40000,
-        80000,
-        160000,
-        200000,
-        500000
-    ]
-
-    q_data = bench_algo(good_sorts.quicksort, lengths, 2000000, 10);
-    dq_data = bench_algo(good_sorts.dual_quicksort, lengths, 2000000, 10);
-    print("normal quick sort: ", q_data);
-    print("dual quick sort: ", dq_data);
-    plt.plot(lengths, q_data, color='red')
-    plt.plot(lengths, dq_data, color='green')
-    plt.legend(['normal quick sort', 'dual quick sort'])
-
-    plt.xlabel('size')
-    plt.ylabel('time (s)')
-
-    plt.show()
-
 
 def exp8():
     lengths = [
@@ -397,5 +397,3 @@ def exp8():
     plt.ylabel('time (s)')
 
     plt.show()
-
-exp6()
