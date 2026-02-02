@@ -53,29 +53,8 @@
 ): set figure.caption(position: top)
 
 = Experiment 1
-
-
-List lengths: 100,
-200,
-300,
-400,
-500,
-600,
-700,
-800,
-900,
-1000,
-1100,
-1200,
-1300,
-1400,
-1500,
-1600,
-1700,
-1800,
-1900,
-
-\# of runs: 10
+- List lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900 ]
+- Number of runs: 10 each
 
 #figure(image("exp1_graph.png"), caption: [Runtime of bubble, selection, and insertion sort as list size increases.])
 
@@ -83,28 +62,8 @@ The algorithm runs in quadratic time as the list length increases. Selection sor
 
 
 = Experiment 2
-
-List lengths: 100,
-200,
-300,
-400,
-500,
-600,
-700,
-800,
-900,
-1000,
-1100,
-1200,
-1300,
-1400,
-1500,
-1600,
-1700,
-1800,
-1900,
-
-\# of runs: 10
+- List lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900 ]
+- Number of runs: 10 each
 
 #figure(image("exp2_bubble_graph.png", width: 75%), caption: [Runtime comparison of normal and optimized bubble sort.])
 
@@ -119,7 +78,7 @@ Both algorithms show a measurable speed up. Bubble sort had a big speed up, whil
 = Experiment 3
 Each of the unoptimized sorting algorithms was tested with the same parameters.
 - Length of list: 5000
-- Number of runs: 10
+- Number of runs: 10 each
 - Number of swaps: [ 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ]
 
 The results show that selection sort behaves the same regardless of how many
@@ -143,26 +102,7 @@ takes the shortest amount of time.
 = Experiment 5
 Each of the sorting algorithms was tested with the following parameters:
 - Length of list: 2,000
-- Number of swaps: [
-  0,
-  1,
-  2,
-  4,
-  8,
-  16,
-  32,
-  64,
-  100,
-  200,
-  300,
-  400,
-  500,
-  600,
-  700,
-  800,
-  900,
-  1000,
-  ]
+- Number of swaps: [ 0, 1, 2, 4, 8, 16, 32, 64, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 ]
 - Number of runs: 100 each
 #figure(
   image("exp5_graph.png"),
@@ -173,20 +113,7 @@ The results show that quick sort initially performs poorly for small swaps becau
 
 = Experiment 6
 Each of the sorting algorithms was tested with the following parameters:
-- Length of lists: [
-  100,
-  1000,
-  2000,
-  5000,
-  10000,
-  20000,
-  30000,
-  40000,
-  80000,
-  160000,
-  200000,
-  500000
-  ]
+- Length of lists: [ 100, 1000, 2000, 5000, 10000, 20000, 30000, 40000, 80000, 160000, 200000, 500000 ]
 - Number of runs: 10 each
 #figure(
   image("exp6_graph.png"),
