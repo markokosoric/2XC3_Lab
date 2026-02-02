@@ -52,7 +52,9 @@
   kind: image,
 ): set figure.caption(position: top)
 
-= Experiment 1
+= Part 1
+
+== Experiment 1
 - List lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900 ]
 - Number of runs: 10 each
 
@@ -61,7 +63,7 @@
 The algorithm runs in quadratic time as the list length increases. Selection sort is the quickest and bubble sort is the slowest.
 
 
-= Experiment 2
+== Experiment 2
 - List lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900 ]
 - Number of runs: 10 each
 
@@ -75,7 +77,7 @@ The algorithm runs in quadratic time as the list length increases. Selection sor
 
 Both algorithms show a measurable speed up. Bubble sort had a big speed up, while selection sort did not show a substantial speed up.
 
-= Experiment 3
+== Experiment 3
 Each of the unoptimized sorting algorithms was tested with the same parameters.
 - Length of list: 5000
 - Number of runs: 10 each
@@ -88,7 +90,7 @@ list.
 
 #figure(image("exp3_graph.png"), caption: [Runtime of sorting algorithms with varying numbers of initial swaps.])
 
-= Experiment 4
+== Experiment 4
 Each of the good sorting algorithms was tested with the same parameters
 - Length of list: [ 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000 ]
 - Number of runs: 10 each
@@ -99,7 +101,9 @@ takes the shortest amount of time.
 
 #figure(image("exp4_graph.png"), caption: [Runtime of merge sort, quicksort, and heap sort for increasing list sizes.])
 
-= Experiment 5
+= Part 2
+
+== Experiment 5
 Each of the sorting algorithms was tested with the following parameters:
 - Length of list: 2,000
 - Number of swaps: [ 0, 1, 2, 4, 8, 16, 32, 64, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 ]
@@ -111,7 +115,7 @@ Each of the sorting algorithms was tested with the following parameters:
 
 The results show that quick sort initially performs poorly for small swaps because of the overhead of pivot selections and recursive partitioning, but becomes the fastest algorithm as the list becomes less sorted. Merge sort and heap sort maintain stable performance across all numbers of swaps.
 
-= Experiment 6
+== Experiment 6
 Each of the sorting algorithms was tested with the following parameters:
 - Length of lists: [ 100, 1000, 2000, 5000, 10000, 20000, 30000, 40000, 80000, 160000, 200000, 500000 ]
 - Number of runs: 10 each
@@ -123,7 +127,7 @@ Each of the sorting algorithms was tested with the following parameters:
 The results show that dual quick sort is increasingly faster than normal quick sort as the length of the lists gets longer. This is probably because dual reduces the number of operations done on average by using two pivots.
 
 
-= Experiment 7
+== Experiment 7
 Recursive merge sort and iterative merge sort were tested with the following
 parameters
 - lengths: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ]
@@ -136,7 +140,7 @@ parameters
 The iterative merge sort was slightly more performant for small list sizes. The
 recursive variant is more performant with large list sizes. This is due to how Python handles memory. Also, the runtime of merge sort is dominated by the linear merging and operations rather than the recursive splitting.
 
-= Experiment 8
+== Experiment 8
 The following algorithms were tested with the following parameters:
 - Length of lists: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41 ]
 - Number of runs: 10,000 each
