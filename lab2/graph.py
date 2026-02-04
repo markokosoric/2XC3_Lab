@@ -54,9 +54,7 @@ def BFS2(G, node1, node2):
             if node == node2:
                 marked[node2] = current_node
                 L.append(node2)
-                print(marked, node)
                 while marked[node] != node1:
-                    print(node)
                     node = marked[node]
                     L.append(node)
                 L.append(node1)
@@ -123,6 +121,16 @@ def DFS3_aux(G, node1, m, inspect):
         m[n] = node1;
         DFS3_aux(G, n, m, inspect)
     return m;
+
+def has_cycle(G):
+    cycle_found = False
+    def check_cycle(node, connectivity):
+        nonlocal cycle_found
+        for n in G.adj[node]:
+            if n in connectivity and connectivity[node] != n:
+                cycle_found = True
+    DFS3_aux(G, 0, {0: None}, check_cycle)
+    return cycle_found
 
 
 
