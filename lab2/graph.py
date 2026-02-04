@@ -122,6 +122,9 @@ def DFS3_aux(G, node1, m, inspect):
         DFS3_aux(G, n, m, inspect)
     return m;
 
+# ========================================
+# Graph properties
+# ========================================
 def has_cycle(G):
     cycle_found = False
     def check_cycle(node, connectivity):
@@ -132,7 +135,9 @@ def has_cycle(G):
     DFS3_aux(G, 0, {0: None}, check_cycle)
     return cycle_found
 
-
+def is_connected(G):
+    conn = DFS3(G, 1);
+    return len(conn) == len(G.adj);
 
 #Use the methods below to determine minimum vertex covers
 
