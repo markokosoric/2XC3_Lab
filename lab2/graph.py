@@ -43,6 +43,41 @@ def BFS(G, node1, node2):
                 marked[node] = True
     return False
 
+#Breadth First Search 2
+def BFS2(G, node1, node2):
+    Q = deque([node1])
+    L = []
+    marked = {node1 : node1}
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        for node in G.adj[current_node]:
+            if node == node2:
+                marked[node2] = current_node
+                L.append(node2)
+                print(marked, node)
+                while marked[node] != node1:
+                    print(node)
+                    node = marked[node]
+                    L.append(node)
+                L.append(node1)
+                return list(reversed(L))
+            if not node in marked:
+                Q.append(node)
+                marked[node] = current_node
+    return []
+
+#Breadth First Search 3
+def BFS3(G, node1):
+    Q = deque([node1])
+    marked = {node1 : node1}
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        for node in G.adj[current_node]:
+            if not node in marked:
+                Q.append(node)
+                marked[node] = current_node
+    return marked
+
 
 #Depth First Search
 def DFS(G, node1, node2):
