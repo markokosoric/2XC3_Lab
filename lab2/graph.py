@@ -60,6 +60,37 @@ def DFS(G, node1, node2):
                 S.append(node)
     return False
 
+# ========================================
+# DFS implementations
+# ========================================
+def DFS2(G, node1, node2):
+    return DFS2_aux(G, node1, node2, {}, [])
+def DFS2_aux(G, node1, node2, m, p):
+    print(m, p)
+    m[node1] = True;
+    p.append(node1);
+    if node1 == node2:
+        return p;
+    for n in G.adj[node1]:
+        if n in m and m[n]: continue
+        r = DFS2_aux(G, n, node2, m, p)
+        if r == []: continue
+        else: return r;
+    p.pop()
+    return []
+
+def DFS3(G, node1):
+    return DFS3_aux(G, node1, {node1: None}, lambda n,m : 0)
+def DFS3_aux(G, node1, m, inspect):
+    inspect(node1, m);
+    for n in G.adj[node1]:
+        if n in m: continue
+        m[n] = node1;
+        DFS3_aux(G, n, m, inspect)
+    return m;
+
+
+
 #Use the methods below to determine minimum vertex covers
 
 def add_to_each(sets, element):
