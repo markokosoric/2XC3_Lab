@@ -1,4 +1,5 @@
 from collections import deque
+import random;
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -24,6 +25,18 @@ class Graph:
 
     def number_of_nodes():
         return len()
+
+def create_random_graph(i: int, j: int) -> Graph:
+    g = Graph(i);
+    e = []
+    for a in range(0, i):
+        for b in range(0, a + 1):
+            e.append((a,b));
+
+    for a,b in random.sample(e, j):
+        g.add_edge(a,b);
+    return g;
+
 
 
 #Breadth First Search
