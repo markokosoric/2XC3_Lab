@@ -41,7 +41,33 @@
 
 = Part 1
 == Experiment 1
+A graph with $n = 100$ nodes and $e in [0, 200)$ was generated 100 times. The
+probability of a cycle existing was recorded. This procedure was repeated for
+all integer values of $e$ within the experiment parameters.
+#figure(
+  image("experiment1_graph.png"),
+  caption: [
+    Probability of a cycle existing vs edge count
+  ]
+)
+The data shows that the probability of finding a cycle follows a sigmoid curve
+when plotted against edge count. The probability starts to rises as the number
+of edges reaches around 50 and reaches probability 1 at around 150.
+
 == Experiment 2
+A graph with $n = 100$ nodes and $e in [100, 500]$ was generated 100 times. The
+probability that the graph is connected was recorded. This procedure was
+repeated for all integer values of $e$ within the experiment parameters.
+#figure(
+  image("experiment2_graph.png"),
+  caption: [
+    Probability of a graph being connected vs edge count
+  ]
+)
+The data shows that the probability of the graph being connected is almost zero
+when the edges is below 150. Once the amount of edges reaches around 350, it
+becomes almost certain that the graph will be connected. This graph also follows
+a sigmoid curve like the graph in experiment 1.
 
 = Part 2
 == Experiment Vertex Cover Approximations
