@@ -1,5 +1,9 @@
 import graph
 import matplotlib.pyplot as plt
+import timeit
+import gc
+import time
+import sys
 
 
 def check_pred(p, i, j) -> bool:
@@ -49,4 +53,49 @@ def experiment2():
     plt.ylabel('probability of connected')
     plt.show()
 
-experiment1();
+
+def experiment_approximations():
+    nodes = 8
+    edges = [1, 5, 10, 15, 20, 25, 28]
+    runs = 1000
+    data_a1 = []
+    data_a2 = []
+    data_a3 = []
+
+    for num_of_edges in edges:
+        total_MVC, total_a1, total_a2, total_a3 = 0, 0, 0, 0
+        for i in range(runs):
+            G1 = graph.create_random_graph(nodes, num_of_edges)
+            
+            total_MVC += len(graph.MVC(G1))
+            print("MVC", total_MVC)
+            total_a1 += len(graph.approx1(G1))
+            print("A1", total_a1)
+            total_a2 += len(graph.approx2(G1))
+            total_a3 += len(graph.approx3(G1))
+
+        data_a1.append(total_a1 / total_MVC)
+        data_a2.append(total_a2 / total_MVC)
+        data_a3.append(total_a3 / total_MVC)
+
+    print("edges = " + str(edges))
+    print("approximation 1 results = " + str(data_a1))
+    print("approximation 2 results = " + str(data_a2))
+    print("approximation 3 results = " + str(data_a3))
+
+    plt.plot(edges, data_a1, color='red')
+    plt.plot(edges, data_a2, color='green')
+    plt.plot(edges, data_a3, color='blue')
+
+    plt.xlabel('edges')
+    plt.ylabel('Expected Approximation Ratio')
+    plt.legend(['approx1', 'approx2', 'approx3'])
+    plt.show()
+
+
+
+
+
+
+
+experiment_approximations()

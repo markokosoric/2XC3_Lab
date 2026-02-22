@@ -23,8 +23,9 @@ class Graph:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
 
-    def number_of_nodes():
-        return len()
+    def number_of_nodes(self):
+        return len(self.adj)
+    
 
 def create_random_graph(i: int, j: int) -> Graph:
     g = Graph(i);
@@ -37,6 +38,13 @@ def create_random_graph(i: int, j: int) -> Graph:
         g.add_edge(a,b);
     return g;
 
+def copy_graph(G):
+    new_G = Graph(G.number_of_nodes())
+
+    for u in G.adj:
+        new_G.adj[u] = G.adj[u].copy()
+
+    return new_G
 
 
 #Breadth First Search
@@ -173,7 +181,7 @@ def is_vertex_cover(G, C):
     return True
 
 def MVC(G):
-    nodes = [i for i in range(G.get_size())]
+    nodes = [i for i in range(G.number_of_nodes())]
     subsets = power_set(nodes)
     min_cover = nodes
     for subset in subsets:
@@ -182,4 +190,52 @@ def MVC(G):
                 min_cover = subset
     return min_cover
 
+def approx1(G):
+    C = set()
+    edges = set()
+
+    for u in G.adj:
+        for v in G.adj[u]:
+            if u < v:
+                edges.add((u,v))
+
+    while edges:
+        deg = {u : 0 for u in G.adj}
+        for (u,v) in edges:
+            deg[u] += 1
+            deg[v] += 1
+        v = max(deg, key=deg.get)
+        C.add(v)
+        edges = {e for e in edges if v not in e}
+
+    return C
+
+def approx2(G):
+    C = set()
+    vertices = list(G.adj.keys())
+
+    while vertices:
+        v = random.choice(vertices)
+        vertices.remove(v)
+        C.add(v)
+        if is_vertex_cover(G, C):
+            break
+
+    return C
+
+def approx3(G):
+    C = set()
+    edges = []
+    
+    for u in G.adj:
+        for v in G.adj[u]:
+            if u < v:
+                edges.append([u,v])
+    
+    while edges:
+        u, v = random.choice(edges)
+        C |= {u, v}
+        edges = [x for x in edges if u not in x and v not in x]
+
+    return C
 
