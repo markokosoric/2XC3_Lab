@@ -196,7 +196,7 @@ def approx1(G):
 
     for u in G.adj:
         for v in G.adj[u]:
-            if u < v:
+            if u <= v:
                 edges.add((u,v))
 
     while edges:
@@ -229,7 +229,7 @@ def approx3(G):
     
     for u in G.adj:
         for v in G.adj[u]:
-            if u < v:
+            if u <= v:
                 edges.append([u,v])
     
     while edges:

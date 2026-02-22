@@ -68,9 +68,7 @@ def experiment_approximations():
             G1 = graph.create_random_graph(nodes, num_of_edges)
             
             total_MVC += len(graph.MVC(G1))
-            print("MVC", total_MVC)
             total_a1 += len(graph.approx1(G1))
-            print("A1", total_a1)
             total_a2 += len(graph.approx2(G1))
             total_a3 += len(graph.approx3(G1))
 
@@ -91,10 +89,6 @@ def experiment_approximations():
     plt.ylabel('Expected Approximation Ratio')
     plt.legend(['approx1', 'approx2', 'approx3'])
     plt.show()
-
-
-
-
 
 
 
