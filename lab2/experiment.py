@@ -54,7 +54,7 @@ def experiment2():
     plt.show()
 
 
-def experiment_approximations():
+def experiment_approximations_1():
     nodes = 8
     edges = [1, 5, 10, 15, 20, 25, 28]
     runs = 1000
@@ -87,6 +87,98 @@ def experiment_approximations():
 
     plt.xlabel('edges')
     plt.ylabel('Expected Approximation Ratio')
+    plt.legend(['approx1', 'approx2', 'approx3'])
+    plt.show()
+
+def experiment_approximations_2():
+    nodes = [4,5,6,7,8]
+    edges = 5
+    runs = 1000
+
+    data_a1 = []
+    data_a2 = []
+    data_a3 = []
+
+    for num_of_nodes in nodes:
+        total_MVC, total_a1, total_a2, total_a3 = 0, 0, 0, 0
+        for i in range(runs):
+            G1 = graph.create_random_graph(num_of_nodes, edges)
+            
+            total_MVC += len(graph.MVC(G1))
+            total_a1 += len(graph.approx1(G1))
+            total_a2 += len(graph.approx2(G1))
+            total_a3 += len(graph.approx3(G1))
+
+        data_a1.append(total_a1 / total_MVC)
+        data_a2.append(total_a2 / total_MVC)
+        data_a3.append(total_a3 / total_MVC)
+
+    print("nodes = " + str(nodes))
+    print("approximation 1 results = " + str(data_a1))
+    print("approximation 2 results = " + str(data_a2))
+    print("approximation 3 results = " + str(data_a3))
+
+    plt.plot(nodes, data_a1, color='red')
+    plt.plot(nodes, data_a2, color='green')
+    plt.plot(nodes, data_a3, color='blue')
+
+    plt.xlabel('nodes')
+    plt.ylabel('Expected Approximation Ratio')
+    plt.legend(['approx1', 'approx2', 'approx3'])
+    plt.show()
+
+def experiment_approximations_3():
+    nodes = 5
+    runs = 100
+    num_of_edges = [1,2,3,4,5,6,7,8,9,10]
+    edges = [(0,1),(0,2),(0,3),(0,4),(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)]
+    powerset_of_edges = graph.power_set(edges)
+    print(powerset_of_edges)
+
+    data_a1 = []
+    data_a2 = []
+    data_a3 = []
+
+    for i in num_of_edges:
+        worst_a1, worst_a2, worst_a3 = 0, 0, 0
+        for edge_set in powerset_of_edges:
+            if len(edge_set) == i:
+                total_MVC = 0
+                G1 = graph.Graph(nodes)
+                
+                for edge in edge_set:
+                    G1.add_edge(edge[0], edge[1])
+
+                total_MVC = len(graph.MVC(G1))
+
+                if total_MVC == 0:
+                    continue
+
+                worst_a1 = max(worst_a1, len(graph.approx1(G1)) / total_MVC)
+                local_worst2 = 0
+                local_worst3 = 0
+                for _ in range(runs):
+                    local_worst2 = max(local_worst2, len(graph.approx2(G1)) / total_MVC)
+                    local_worst3 = max(local_worst3, len(graph.approx3(G1)) / total_MVC)
+
+                worst_a2 = max(worst_a2, local_worst2)
+                worst_a3 = max(worst_a3, local_worst3)  
+
+        data_a1.append(worst_a1)
+        data_a2.append(worst_a2)
+        data_a3.append(worst_a3)
+
+    print("edges = " + str(num_of_edges))
+    print("approximation 1 results = " + str(data_a1))
+    print("approximation 2 results = " + str(data_a2))
+    print("approximation 3 results = " + str(data_a3))
+
+    plt.plot(num_of_edges, data_a1, color='red')
+    plt.plot(num_of_edges, data_a2, color='green')
+    plt.plot(num_of_edges, data_a3, color='blue')
+
+    plt.xlabel('edges')
+    plt.ylabel('Worst-Case Approximation Ratio')
     plt.legend(['approx1', 'approx2', 'approx3'])
     plt.show()
 
@@ -188,3 +280,4 @@ def experiment_MIS_MVC_correlation_process_data():
     plt.legend(['sum', 'independent set size', 'vertex cover size'])
     plt.show()
 
+experiment_approximations_3()
