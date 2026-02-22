@@ -90,6 +90,101 @@ def experiment_approximations():
     plt.legend(['approx1', 'approx2', 'approx3'])
     plt.show()
 
+def experiment_MIS_MVC_correlation():
+    nodes = 10;
+    edges = [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            ]
+    runs = 1000;
 
+    avg_indep = [];
+    avg_vertc = [];
 
-experiment_approximations()
+    for e in edges:
+        indep = 0;
+        vertc = 0;
+        for _ in range(runs):
+            g = graph.create_random_graph(nodes, e);
+            indep += len(graph.mis(g));
+            vertc += len(graph.MVC(g));
+        avg_indep.append(float(indep)/float(runs));
+        avg_vertc.append(float(vertc)/float(runs));
+
+    print("edges = " + str(edges));
+    print("avg_indep = " + str(avg_indep));
+    print("avg_vertc = " + str(avg_vertc));
+    plt.plot(edges, avg_indep, color='red')
+    plt.plot(edges, avg_vertc, color='blue')
+    plt.xlabel('edges')
+    plt.ylabel('avg')
+    plt.legend(['independent set size', 'vertex cover size'])
+    plt.show()
+
+def experiment_MIS_MVC_correlation_process_data():
+    f = open("./experiment_MIS_MVC_correlation_output.txt")
+    d = {};
+    exec(f.read(), {}, d) # make sure `experiment_mis_output.txt` has not been tampered with before running
+    edges = d['edges'];
+    new_data = [];
+    for i in range(len(edges)):
+        new_data.append(d['avg_indep'][i] + d['avg_vertc'][i]);
+    plt.plot(edges, new_data, color='green')
+    plt.plot(edges, d['avg_indep'], color='red')
+    plt.plot(edges, d['avg_vertc'], color='blue')
+    plt.xlabel('edges')
+    plt.legend(['sum', 'independent set size', 'vertex cover size'])
+    plt.show()
+

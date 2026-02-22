@@ -239,3 +239,25 @@ def approx3(G):
 
     return C
 
+# ========================================
+# Maximum Independent Subset
+# ========================================
+
+def is_independent(G: Graph, nodes: list[int]) -> bool:
+    for i in range(len(nodes)):
+        for j in range(i):
+            if G.are_connected(nodes[i], nodes[j]):
+                return False;
+    return True;
+
+
+def mis(G: Graph) -> list[int]:
+    pset = power_set(list(range(G.number_of_nodes())));
+    max_indep = [];
+    max_nodes = 0;
+    for s in pset:
+        if len(s) > max_nodes and is_independent(G, s):
+            max_nodes = len(s);
+            max_indep = s;
+    return max_indep;
+
