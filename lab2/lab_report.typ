@@ -37,7 +37,17 @@
 ): set figure.caption(position: top)
 
 = Executive Summary
-// TODO
+
+- This lab explores DFS and BFS implementations.
+
+- Demonstrates the relationship between cycles and the number of edges and vertices in a graph.
+
+- Explores graph properties, vertex cover approximation algorithms and maximum independent sets.
+
+- Demonstrates differences between greedy and random choice vertex cover approximation algorithms.
+
+- Explores the correlation between minimum vertex covers and maximum independent sets.
+
 
 = Part 1
 == Experiment 1
@@ -74,9 +84,8 @@ a sigmoid curve like the graph in experiment 1.
 
 === Experiment 1
 For each edge count in $[1, 5, 10, 15, 20, 25, 28]$ on graphs with $n = 8$
-nodes, I generated 1000 random graphs. For each graph I computed the total MVC
-and the total of each of the three approximations, then averaged the ratio
-$abs(A_i)/abs("MVC")$ per edge count.
+nodes, 1000 random graphs were generated. For each graph, the total MVC
+and the total of each of the three approximations were computed, and finally the toal sum of $abs(A_i)$ was averaged over the total sum $abs("MVC")$.
 
 #figure(
   image("experiment_approximations_1_graph.png"),
@@ -95,11 +104,9 @@ performance improve with increased edges. This also shows that the greedy
 approximation performs better than the random picking approximations.
 
 === Experiment 2
-I fixed $e = 5$ edges and varied the node count over $[4, 5, 6, 7, 8]$. For each
-node count I generated 1000 random graphs, computed the total MVC and the total
-of each of the three approximations, and averaged the ratio $abs(A_i)/abs("MVC")$ for
-the plot.
-
+For the expirement, $e = 5$ edges were fixed and the node count was varied over $[4, 5, 6, 7, 8]$. For each
+node count, 1000 random graphs were generated, then total MVC and the total
+of each of the three approximations were computed, and finally the toal sum of $abs(A_i)$ was averaged over the total sum $abs("MVC")$.
 #figure(
   image("experiment_approximations_2_graph.png"),
   caption: [
@@ -117,11 +124,10 @@ can waste picks more easily. This also shows that approximation 1's performance
 is largely independent of the number of nodes when the edges are fixed.
 
 === Experiment 3
-For $n = 5$ nodes I enumerated all graphs by taking the power set of the 10
-possible edges, then grouped by edge count $e in [1, 10]$. For each graph I
-computed the worst-case ratio for `approx1`, and for `approx2` and `approx3` I
-took the worst ratio across 100 random runs, then the worst over all graphs with
-the same $e$.
+In this experiment, $n = 5$ nodes were fixed. To enumerate through all the graphs, the power set of the 10
+possible edges were taken and grouped by edge count $e in [1, 10]$. For each graph, the worst-case ratio for `approx1` was taken. For `approx2` and `approx3`,
+the worst ratio across 100 random runs of the same graph was computed. Finally, the worst over all ratio across graphs with
+the same $e$ was used.
 
 #figure(
   image("experiment_approximations_3_graph.png"),
