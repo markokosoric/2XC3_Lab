@@ -279,5 +279,3 @@ def experiment_MIS_MVC_correlation_process_data():
     plt.xlabel('edges')
     plt.legend(['sum', 'independent set size', 'vertex cover size'])
     plt.show()
-
-experiment_approximations_3()
