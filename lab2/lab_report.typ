@@ -37,17 +37,21 @@
 ): set figure.caption(position: top)
 
 = Executive Summary
-
-- This lab explores DFS and BFS implementations.
-
-- Demonstrates the relationship between cycles and the number of edges and vertices in a graph.
-
-- Explores graph properties, vertex cover approximation algorithms and maximum independent sets.
-
-- Demonstrates differences between greedy and random choice vertex cover approximation algorithms.
-
-- Explores the correlation between minimum vertex covers and maximum independent sets.
-
+- the probability of a randomly generated graph containing a cycle and being
+  connected follow a sigmoid curve when plotted against edge count.
+- The probability that a random graph with 100 nodes contains a cycle is close
+  to 1 when the edges is equal to the amount of nodes.
+- The probability that a random graph with 100 nodes being connected is close
+  to 1 when there are three times more edges than nodes.
+- The minimum vertex cover approximation strategy of choosing the highest degree
+  edge (named `approx1`) consistently outperforms the stochastic algorithms.
+- The size of the average maximum independent subset decreases when the edge
+  count is increased.
+- The size of the average minimum vertex cover increased when the edge count is
+  increased.
+- The sum of sizes of the maximum independent subset and the minimum vertex
+  cover remains roughly constant and equal to the amount of nodes regardless of
+  the amount of edges.
 
 = Part 1
 == Experiment 1
