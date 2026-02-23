@@ -136,9 +136,6 @@ the same $e$ was used.
   ],
 )
 
-To generate all graphs of size 5, I take all possible edge combinations for a 5
-node graph and produce the power set.
-
 In this experiment, as the number of edges increase while nodes stay at 5, the
 worst case approximation ratio for approximation 2 and approximation 3 decrease
 to 1. Approximation 1 stays near or at one the whole time.
