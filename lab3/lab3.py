@@ -63,12 +63,41 @@ class RBNode:
          return "(" + str(self.value) + "," + self.colour + ")"
 
     def rotate_right(self):
-        raise Exception("Not Implemented")
-        #TODO
+        p = self.parent;
+        l = self.left;
+        assert l != None;
+        v = l.right;
+
+        if v != None:
+            v.parent = self;
+        l.right = self;
+        l.parent = p;
+        self.left = v;
+        self.parent = l;
+        if p != None:
+            if p.left == self:
+                p.left = l;
+            else:
+                p.right = l;
+
 
     def rotate_left(self):
-        raise Exception("Not Implemented")
-        #TODO
+        p = self.parent;
+        r = self.right;
+        assert r != None;
+        v = r.left;
+
+        if v != None:
+            v.parent = self;
+        r.left = self;
+        r.parent = p;
+        self.right = v;
+        self.parent = r;
+        if p != None:
+            if p.left == self:
+                p.left = r;
+            else:
+                p.right = r;
 
 
 
