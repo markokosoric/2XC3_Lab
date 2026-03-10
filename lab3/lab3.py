@@ -1,4 +1,12 @@
+from typing import Literal, Optional
+
+
 class RBNode:
+    value: int
+    left: Optional[RBNode]
+    right: Optional[RBNode]
+    parent: Optional[RBNode]
+    color: Literal["R", "B"]
 
     def __init__(self, value):
         self.value = value
@@ -7,13 +15,12 @@ class RBNode:
         self.parent = None
         self.colour = "R"
 
-    def get_uncle(self):
-        return
-
     def is_leaf(self):
         return self.left == None and self.right == None
 
     def is_left_child(self):
+        if self.parent == None:
+            raise Exception("parent is none")
         return self == self.parent.left
 
     def is_right_child(self):
@@ -32,17 +39,22 @@ class RBNode:
         self.colour = "R"
 
     def get_brother(self):
+        if self.parent == None:
+            raise Exception("parent is none")
         if self.parent.right == self:
             return self.parent.left
         return self.parent.right
 
     def get_uncle(self):
+        if self.parent == None:
+            raise Exception("parent is none")
         return self.parent.get_brother()
 
     def uncle_is_black(self):
-        if self.get_uncle() == None:
+        u = self.get_uncle();
+        if u == None:
             return True
-        return self.get_uncle().is_black()
+        return u.is_black()
 
     def __str__(self):
         return "(" + str(self.value) + "," + self.colour + ")"
@@ -51,14 +63,17 @@ class RBNode:
          return "(" + str(self.value) + "," + self.colour + ")"
 
     def rotate_right(self):
+        raise Exception("Not Implemented")
         #TODO
 
     def rotate_left(self):
+        raise Exception("Not Implemented")
         #TODO
 
 
 
 class RBTree:
+    root: Optional[RBNode]
 
     def __init__(self):
         self.root = None
@@ -104,7 +119,11 @@ class RBTree:
         if node.parent == None:
             node.make_black()
         while node != None and node.parent != None and node.parent.is_red(): 
+            raise Exception("Not Implemented")
             #TODO
+
+        if self.root == None:
+            raise Exception("root is none")
         self.root.make_black()
                     
         
