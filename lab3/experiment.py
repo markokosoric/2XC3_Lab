@@ -18,7 +18,7 @@ def create_near_sorted_list(length, max_value, swaps):
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
 
-
+#Experiment code
 def experiment1():
     lengths = [1,2,4,8,16,32,64,128,256]
     max = 10000
@@ -84,9 +84,45 @@ def experiment2():
     plt.ylabel('Average Difference in Height (BST Height - RBT Height)' )
     plt.show()
 
-tree = XC3Tree(5)
-print("Height: ", tree.get_height())
-print("Nodes: ", tree.get_num_nodes())
+def experiment3():
+    degrees = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    data = []
+
+    for degree in degrees:
+        data.append(XC3Tree(degree).get_height())
+
+    print("heights: ", str(data))
+
+    plt.plot(degrees, data, color='red')
+    plt.xlabel('Degree')
+    plt.ylabel('Height')
+    plt.show()
+#formula: h(i) = 1 + h(i-2)
+
+def experiment4():
+    degrees = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+    data = []
+
+    for degree in degrees:
+        data.append(XC3Tree(degree).get_num_nodes())
+
+    print("num_nodes: ", str(data))
+
+    plt.plot(degrees, data, color='red')
+    plt.xlabel('Degree')
+    plt.ylabel('Number of Nodes')
+    plt.show()
+#formula:
+
+experiment4()
+
+
+
+
+
+# tree = XC3Tree(5)
+# print("Height: ", tree.get_height())
+# print("Nodes: ", tree.get_num_nodes())
 
 
 
