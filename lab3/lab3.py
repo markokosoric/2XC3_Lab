@@ -6,7 +6,7 @@ class RBNode:
     left: Optional[RBNode]
     right: Optional[RBNode]
     parent: Optional[RBNode]
-    color: Literal["R", "B"]
+    colour: Literal["R", "B"]
 
     def __init__(self, value):
         self.value = value
@@ -143,13 +143,42 @@ class RBTree:
             else:
                 self.__insert(node.right, value)
 
-    def fix(self, node):
+    def fix(self, node: RBNode):
         #You may alter code in this method if you wish, it's merely a guide.
         if node.parent == None:
             node.make_black()
         while node != None and node.parent != None and node.parent.is_red(): 
-            raise Exception("Not Implemented")
-            #TODO
+            uncle = node.get_uncle()
+            #If parent is left child of grandparent
+            if node.parent == node.parent.parent.left:
+                if uncle and uncle.colour == 'R':
+                    node.parent.colour = 'B'
+                    uncle.colour = 'B'
+                    node.parent.parent.colour = 'R'
+                    node = node.parent.parent
+                else:
+                    if node == node.parent.right:
+                        node = node.parent
+                        node.rotate_left()
+                    node.parent.colour = 'B'
+                    node.parent.parent.colour = 'R'
+                    node.parent.parent.rotate_right()
+            
+            #If parent is right child of grandparent
+            else:
+                if uncle and uncle.colour == 'R':
+                    node.parent.colour = 'B'
+                    uncle.colour = 'B'
+                    node.parent.parent.colour = 'R'
+                    node = node.parent.parent
+                else:
+                    if node == node.parent.left:
+                        node = node.parent
+                        node.rotate_right()
+                    node.parent.colour = 'B'
+                    node.parent.parent.colour = 'R'
+                    node.parent.parent.rotate_left()
+
 
         if self.root == None:
             raise Exception("root is none")
