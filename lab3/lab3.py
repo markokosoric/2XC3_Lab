@@ -149,7 +149,7 @@ class RBTree:
             node.make_black()
         while node != None and node.parent != None and node.parent.is_red(): 
             uncle = node.get_uncle()
-            #If parent is left child of grandparent
+            
             if node.parent == node.parent.parent.left:
                 if uncle and uncle.colour == 'R':
                     node.parent.colour = 'B'
@@ -164,7 +164,7 @@ class RBTree:
                     node.parent.parent.colour = 'R'
                     node.parent.parent.rotate_right()
             
-            #If parent is right child of grandparent
+            
             else:
                 if uncle and uncle.colour == 'R':
                     node.parent.colour = 'B'
@@ -198,3 +198,4 @@ class RBTree:
         if node.right == None:
             return "[" +  self.__str_helper(node.left) + " <- " + str(node) + "]"
         return "[" + self.__str_helper(node.left) + " <- " + str(node) + " -> " + self.__str_helper(node.right) + "]"
+
