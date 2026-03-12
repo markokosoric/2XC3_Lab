@@ -1,5 +1,19 @@
 from typing import Literal, Optional
 
+# DEBUG
+#
+# adds a `log: list[str]` field to a tree for debug purposes.
+# All strings are valid typst when used with the cetz package
+#
+# Call `print(str.join("\n", tree.log))` to print the log
+def monkey_patch_insert_logger(tree):
+    tree.log = [tree.fmt_typst()];
+    insert = tree.insert;
+    def new_insert(value):
+        insert(value);
+        tree.log.append(tree.fmt_typst());
+    tree.insert = new_insert;
+
 
 class RBNode:
     value: int
