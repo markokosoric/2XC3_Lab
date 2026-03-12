@@ -99,6 +99,30 @@ class RBNode:
             else:
                 p.right = r;
 
+    # formats to a typst cetz.tree compatable string
+    def fmt_typst(self) -> str:
+        val = "";
+        if self.is_black():
+            val = "rect([" + str(self.value) + "])"
+        else:
+            val = "rect(stroke: red, text(red)[" + str(self.value) + "])"
+
+        l = "";
+        if self.left == None:
+            l = "rect(stroke: none, $*$)";
+        else:
+            l = self.left.fmt_typst();
+        r = "";
+        if self.right == None:
+            r = "rect(stroke: none, $*$)";
+        else:
+            r = self.right.fmt_typst();
+
+        if self.left == None and self.right == None:
+            return val;
+        else:
+            return "(" + val + ", " + l + ", "  + r  + ")";
+
 
 
 class RBTree:
@@ -208,6 +232,19 @@ class RBTree:
             return "[" +  self.__str_helper(node.left) + " <- " + str(node) + "]"
         return "[" + self.__str_helper(node.left) + " <- " + str(node) + " -> " + self.__str_helper(node.right) + "]"
 
+    # formats to a typst cetz.tree compatable string
+    #
+    # Example:
+    #
+    # ```typst
+    # #import "@preview/cetz:0.4.2": *
+    # [output of `fmt_typst`]
+    # ```
+    def fmt_typst(self) -> str:
+        if self.root == None:
+            return  "";
+        return "#figure(canvas(tree.tree(" + self.root.fmt_typst() + ")))";
+
 class BSNode:
     value: int
     left: Optional[BSNode]
@@ -249,6 +286,25 @@ class BSNode:
     def __repr__(self):
          return "(" + str(self.value) + ")"
 
+    # formats to a typst cetz.tree compatable string
+    def fmt_typst(self) -> str:
+        val = "rect([" + str(self.value) + "])"
+
+        l = "";
+        if self.left == None:
+            l = "rect(stroke: none, $*$)";
+        else:
+            l = self.left.fmt_typst();
+        r = "";
+        if self.right == None:
+            r = "rect(stroke: none, $*$)";
+        else:
+            r = self.right.fmt_typst();
+
+        if self.left == None and self.right == None:
+            return val;
+        else:
+            return "(" + val + ", " + l + ", "  + r  + ")";
 
 
 class BSTree:
@@ -304,6 +360,19 @@ class BSTree:
             return "[" +  self.__str_helper(node.left) + " <- " + str(node) + "]"
         return "[" + self.__str_helper(node.left) + " <- " + str(node) + " -> " + self.__str_helper(node.right) + "]"
 
+    # formats to a typst cetz.tree compatable string
+    #
+    # Example:
+    #
+    # ```typst
+    # #import "@preview/cetz:0.4.2": *
+    # [output of `fmt_typst`]
+    # ```
+    def fmt_typst(self) -> str:
+        if self.root == None:
+            return  "";
+        return "#figure(canvas(tree.tree(" + self.root.fmt_typst() + ")))";
+
 class XC3Node:
     parent: Optional[XC3Node]
     children: list[XC3Node]
@@ -320,7 +389,17 @@ class XC3Node:
 
     def getdegree(self) -> int:
         return self.degree
-        
+
+    # formats to a typst cetz.tree compatable string
+    def fmt_typst(self) -> str:
+        val = "rect([" + str(self.degree) + "])"
+
+        params = [val];
+        for c in self.children:
+            params.append(c.fmt_typst());
+
+        return "(" + str.join(", ", params)  + ")";
+
 class XC3Tree:
     root: Optional[XC3Node]
 
@@ -372,3 +451,16 @@ class XC3Tree:
         if self.root is None:
             return 0
         return self.root.getdegree()
+
+    # formats to a typst cetz.tree compatable string
+    #
+    # Example:
+    #
+    # ```typst
+    # #import "@preview/cetz:0.4.2": *
+    # [output of `fmt_typst`]
+    # ```
+    def fmt_typst(self) -> str:
+        if self.root == None:
+            return  "";
+        return "#figure(canvas(tree.tree(" + self.root.fmt_typst() + ")))";
