@@ -303,18 +303,72 @@ class BSTree:
         if node.right == None:
             return "[" +  self.__str_helper(node.left) + " <- " + str(node) + "]"
         return "[" + self.__str_helper(node.left) + " <- " + str(node) + " -> " + self.__str_helper(node.right) + "]"
-    
+
+class XC3Node:
+    parent: Optional[XC3Node]
+    children: list[XC3Node]
+    degree: int 
+
+    def __init__(self, degree: int, parent: Optional[XC3Node] = None):
+        self.children = []
+        self.parent = parent
+        self.degree = degree
+
+        for i in range(1, degree + 1):
+            child_degree = max(i-2,0)
+            self.children.append(XC3Node(child_degree, self))
+
+    def getdegree(self) -> int:
+        return self.degree
+        
 class XC3Tree:
     root: Optional[XC3Node]
 
+    def __init__(self, degree: int = None):
+        if degree is not None and degree < 0:
+            raise ValueError("degree must be >= 0")
+        
+        self.root = None
+        
+        if degree is not None and degree >= 0:
+            self.root = XC3Node(degree)
 
-    def __init__(self, root):
-        self.root = root
+    def is_empty(self):
+        return self.root == None
+        
+    def get_height(self) -> int:
+        if self.is_empty():
+            return 0
+        return self.__get_height(self.root)
 
-class XC3Node:
+    def __get_height(self, node: XC3Node):
+        if len(node.children) == 0:
+            return 1
+        
+        max_child_height = 0
 
+        for child in node.children:
+            h = self.__get_height(child)
+            max_child_height = max(max_child_height, h)
 
-    def __init__(self, children, parent):
-        self.children = children
-        self.parent = parent
+        return 1 + max_child_height
     
+    def get_num_nodes(self) -> int:
+        if self.is_empty():
+            return 0
+        return self.__get_num_of_nodes(self.root)
+    
+    def __get_num_of_nodes(self, node: XC3Node):
+        if len(node.children) == 0:
+            return 1
+        
+        count = 0
+        for child in node.children:
+            count += self.__get_num_of_nodes(child)
+        
+        return 1 + count
+    
+    def get_degree(self) -> int:
+        if self.root is None:
+            return 0
+        return self.root.getdegree()

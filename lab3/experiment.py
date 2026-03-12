@@ -84,7 +84,10 @@ def experiment2():
     plt.ylabel('Average Difference in Height (BST Height - RBT Height)' )
     plt.show()
 
-experiment2()
+tree = XC3Tree(5)
+print("Height: ", tree.get_height())
+print("Nodes: ", tree.get_num_nodes())
+
 
 
 
