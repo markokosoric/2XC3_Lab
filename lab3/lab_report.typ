@@ -11,19 +11,19 @@
 
 
 #align(center)[
-  #text(size: 2em, weight: "bold")[Lab Report: Sorting Algorithms Analysis]
+  #text(size: 2em, weight: "bold")[Lab Report: Binary Trees Analysis]
 
   #v(1em)
 
-  #text(size: 1.5em)[2XC3 Lab 1]
+  #text(size: 1.5em)[2XC3 Lab 3]
 
   #v(1em)
 
-  #text(size: 1.2em)[Marko Kosoric, Patrick]
+  #text(size: 1.2em)[Marko Kosoric, Patrick Chen]
 
   #v(1em)
 
-  #text(size: 1em)[February 1, 2026]
+  #text(size: 1em)[March 12, 2026]
 ]
 
 #pagebreak()
@@ -38,14 +38,18 @@
 
 = Executive Summary
 
-
-#pagebreak()
-
-#show figure.where(
-  kind: image,
-): set figure.caption(position: top)
-
-
+- For random insertion orders with 10,000 nodes, the average difference in
+  height between BSTs and RBTS is 15.196.
+- RBT height stayed consistently lower because balancing operations prevent the
+  worst-case growth seen in BSTs.
+- For nearly sorted input (0 swaps), BSTs had the largest height gap versus
+  RBTs. Increasing swaps reduced this gap toward 1.
+- For X3Trees of degree $i$, height followed the recurrence $h(i) = 1 + h(i-2)$
+  with closed form $h(i) = ceil(i/2) + 1$.
+- The number of nodes in a degree-$i$ X3Tree matched the Fibonacci relation
+  $F_(i+2)$.
+- Since node count grows exponentially as a function of degree ($O(phi^d)$),
+  X3Tree height as a function of nodes is $O(log(n))$.
 
 #pagebreak()
 
@@ -54,7 +58,9 @@
 
 == Expirement 1
 
-Random lists of length 10,000 were generated. Each list was used to make a Binary Search Tree and a Red-Black Tree using the same insertion order. After building both trees, the difference
+Random lists of length 10,000 were generated. Each lisake a
+Binary Search Tree and a Red-Black Tree using the same insertion order. After
+building both trees, the difference
 
 $ "BST height" - "RBT height" $
 
@@ -64,37 +70,57 @@ $ ("BST height" - "RBT height") / n $
 
 was measured.
 
-For lists of length 10,000, the average difference was 15.196. This shows that binary search trees are consistently taller then red-black trees when inserting a lot values in random order.
+For lists of length 10,000, the average difference was 15.196. This shows that
+binary search trees are consistently taller then red-black trees when inserting
+a lot values in random order.
 
-These results were expected since red-black trees are self-balancing, while binary search trees depend on the insertion order which can cause them to be very unbalanced.
+These results were expected since red-black trees are self-balancing, while
+binary search trees depend on the insertion order which can cause them to be
+very unbalanced.
 
-However, there are cases where a binary search trees are better. BSTs are simpler to implement and do not need rotations and recoloring operations. This means when the number of inputs are smaller, BST insertions are slightly faster and can still be relatively balanced compared to the red-black tree version. This can be seen in Figure 1
+However, there are cases where a binary search trees are better. BSTs are
+simpler to implement and do not need rotations and recoloring operations. This
+means when the number of inputs are smaller, BST insertions are slightly faster
+and can still be relatively balanced compared to the red-black tree version.
+This can be seen in Figure 1
 
 #figure(
-  image("experiment_0_graph.png"),
+  image("experiment1_2_graph.png"),
   caption: [
     Plot of Average height of BSTs and RBTs on Varying Node Sizes
   ],
 )
 
-== Expiremnt 2
+== Expirement 2
 
-Random lists of length 50 were generated 10,000 times per run. Each run the list would become more unsorted by performing an increasing number of random swaps (swaps = [0,1,2,3,4,5,10,25,50,100]). The modified list was then inserted into both a BST and RBT and the height difference
+Random lists of length 50 were generated 10,000 times per run. Each run the list
+would become more unsorted by performing an increasing number of random swaps
+(swaps = [0,1,2,3,4,5,10,25,50,100]). The modified list was then inserted into
+both a BST and RBT and the height difference
 
 $ ("BST height" - "RBT height") / n $
 
-was measured. The resulting graph plots number of swaps on the x-axis and average difference on the y-axis.
+was measured. The resulting graph plots number of swaps on the x-axis and
+average difference on the y-axis.
 
 #figure(
-  image("experiment_2_graph.png"),
+  image("experiment2_graph.png"),
   caption: [
-    Plot of Average Difference in height between BSTs and RBTs on Varying Amounts of Random Swaps
+    Plot of Average Difference in height between BSTs and RBTs on Varying
+    Amounts of Random Swaps
   ],
 )
 
-When the list was perfectly sorted (0 swaps), the BST became very unbalanced and produced the largest height difference compared to the red-black tree. As the list became less sorted (\# swaps increased), the difference in height decreased closer to 1.
+When the list was perfectly sorted (0 swaps), the BST became very unbalanced and
+produced the largest height difference compared to the red-black tree. As the
+list became less sorted (\# swaps increased), the difference in height
+decreased closer to 1.
 
-The results were expected because BSTs performance highly depends on input order. With a sorted list, the BST becomes similar to a linked list causing a big height. In contrast, the RBT's performance stays similar regardless of input order. As the list becomes less sorted, the BST structure becomes more balanced because the order of values are more random.
+The results were expected because BSTs performance highly depends on input
+order. With a sorted list, the BST becomes similar to a linked list causing a
+big height. In contrast, the RBT's performance stays similar regardless of input
+order. As the list becomes less sorted, the BST structure becomes more balanced
+because the order of values are more random.
 
 = Part 2
 == Experiment 3
@@ -165,8 +191,8 @@ $
 === Number of nodes
 The results show that the number of nodes for a tree of degree $i$ is the
 Fibonacci number $F_(i+2)$. This is because the child with degree $i-4$ has
-$F_(i)$ nodes and the sum of other nodes is equal to $F_(i-3) - 1$, therefore the
-sum of all nodes is $F_(i-2)$
+$F_(i)$ nodes and the sum of other nodes is equal to $F_(i-3) - 1$, therefore
+the sum of all nodes is $F_(i-2)$
 
 It is known that the sum of all Fibonacci numbers up to $n$ is equal to one less
 than the $(n+2)$th Fibonacci number.
@@ -201,6 +227,17 @@ Since the complexity of height with respect to degree is linear, $h circle.small
 
 #pagebreak()
 
-= Appendix: Code Navigation
+= Appendix
+== Code Structure
 
 
+- `tree.py`: RBT, BST, and X3Tree data structure.
+- `experiment.py`: Runs all experiments, collects data, and produces plots.
+- `experiment1_1_output.txt`, `experiment1_2_output.txt` and
+  `experiment2_output.txt`: Text output for Part 1 experiments.
+- PNG figures: `experiment1_2_graph.png`, `experiment2_graph.png`
+- `lab_report.typ`: Code for the lab report document.
+
+== Code Navigation
+To run a specific experiment, modify `experiment.py` to call the desired
+experiment function.
