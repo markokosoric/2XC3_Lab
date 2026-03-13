@@ -48,6 +48,54 @@
 
 
 #pagebreak()
+
+= Part 1
+
+
+== Expirement 1
+
+Random lists of length 10,000 were generated. Each list was used to make a Binary Search Tree and a Red-Black Tree using the same insertion order. After building both trees, the difference
+
+$ "BST height" - "RBT height" $
+
+was calculated. This process was repeated 10,000, and the average difference
+
+$ ("BST height" - "RBT height") / n $
+
+was measured.
+
+For lists of length 10,000, the average difference was 15.196. This shows that binary search trees are consistently taller then red-black trees when inserting a lot values in random order.
+
+These results were expected since red-black trees are self-balancing, while binary search trees depend on the insertion order which can cause them to be very unbalanced.
+
+However, there are cases where a binary search trees are better. BSTs are simpler to implement and do not need rotations and recoloring operations. This means when the number of inputs are smaller, BST insertions are slightly faster and can still be relatively balanced compared to the red-black tree version. This can be seen in Figure 1
+
+#figure(
+  image("experiment_0_graph.png"),
+  caption: [
+    Plot of Average height of BSTs and RBTs on Varying Node Sizes
+  ],
+)
+
+== Expiremnt 2
+
+Random lists of length 50 were generated 10,000 times per run. Each run the list would become more unsorted by performing an increasing number of random swaps (swaps = [0,1,2,3,4,5,10,25,50,100]). The modified list was then inserted into both a BST and RBT and the height difference
+
+$ ("BST height" - "RBT height") / n $
+
+was measured. The resulting graph plots number of swaps on the x-axis and average difference on the y-axis.
+
+#figure(
+  image("experiment_2_graph.png"),
+  caption: [
+    Plot of Average Difference in height between BSTs and RBTs on Varying Amounts of Random Swaps
+  ],
+)
+
+When the list was perfectly sorted (0 swaps), the BST became very unbalanced and produced the largest height difference compared to the red-black tree. As the list became less sorted (\# swaps increased), the difference in height decreased closer to 1.
+
+The results were expected because BSTs performance highly depends on input order. With a sorted list, the BST becomes similar to a linked list causing a big height. In contrast, the RBT's performance stays similar regardless of input order. As the list becomes less sorted, the BST structure becomes more balanced because the order of values are more random.
+
 = Part 2
 == Experiment 3
 A X3Tree was generated for all degrees $i in NN_0$ where $0 <= i <= 25$. The
@@ -59,39 +107,44 @@ number of nodes in the tree was recorded. Since X3Tree generation is
 deterministic, only one tree was generated for each degree.
 
 == Results
-#figure(table(
-  columns: 3,
-  stroke: none, column-gutter: 1em, row-gutter: -0.1em,
-  [*Size*], [*Height*], [*Nodes*],
-  table.hline(),
-  [0], [1], [1],
-  [1], [2], [2],
-  [2], [2], [3],
-  [3], [3], [5],
-  [4], [3], [8],
-  [5], [4], [13],
-  [6], [4], [21],
-  [7], [5], [34],
-  [8], [5], [55],
-  [9], [6], [89],
-  [10], [6], [144],
-  [11], [7], [233],
-  [12], [7], [377],
-  [13], [8], [610],
-  [14], [8], [987],
-  [15], [9], [1597],
-  [16], [9], [2584],
-  [17], [10], [4181],
-  [18], [10], [6765],
-  [19], [11], [10946],
-  [20], [11], [17711],
-  [21], [12], [28657],
-  [22], [12], [46368],
-  [23], [13], [75025],
-  [24], [13], [121393],
-  [25], [14], [196418],
-  table.hline(),
-), caption: [Results for experiment 3 (height) and experiement 4 (Nodes)])
+#figure(
+  table(
+    columns: 3,
+    stroke: none,
+    column-gutter: 1em,
+    row-gutter: -0.1em,
+    [*Size*], [*Height*], [*Nodes*],
+    table.hline(),
+    [0], [1], [1],
+    [1], [2], [2],
+    [2], [2], [3],
+    [3], [3], [5],
+    [4], [3], [8],
+    [5], [4], [13],
+    [6], [4], [21],
+    [7], [5], [34],
+    [8], [5], [55],
+    [9], [6], [89],
+    [10], [6], [144],
+    [11], [7], [233],
+    [12], [7], [377],
+    [13], [8], [610],
+    [14], [8], [987],
+    [15], [9], [1597],
+    [16], [9], [2584],
+    [17], [10], [4181],
+    [18], [10], [6765],
+    [19], [11], [10946],
+    [20], [11], [17711],
+    [21], [12], [28657],
+    [22], [12], [46368],
+    [23], [13], [75025],
+    [24], [13], [121393],
+    [25], [14], [196418],
+    table.hline(),
+  ),
+  caption: [Results for experiment 3 (height) and experiement 4 (Nodes)],
+)
 
 == Conclusion
 === Height
@@ -123,11 +176,10 @@ $
 
 Since the sum of all nodes is
 $
-  "Nodes"(n)
-  &= 1 + sum_(i = -1)^(n-2) "Nodes"(c) \
-  &= 1 + sum_(i=1)^n F_i & "Inductive hypothesis" \
-  &= 1 + F_(i+2) - 1 & "Fibonacci Identity" \
-  &= F_(i+2)
+  "Nodes"(n) & = 1 + sum_(i = -1)^(n-2) "Nodes"(c) \
+             & = 1 + sum_(i=1)^n F_i               & "Inductive hypothesis" \
+             & = 1 + F_(i+2) - 1                   &   "Fibonacci Identity" \
+             & = F_(i+2)
 $
 Since the base case is also fulfilled, the number of nodes in a degree $n$
 X3Tree is $F_(n+2)$

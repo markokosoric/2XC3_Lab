@@ -19,7 +19,29 @@ def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
 
 #Experiment code
-def experiment1():
+    
+def experiment1_1():
+    length = 10000
+    max = 10000
+    runs = 1000
+
+    average_difference = 0
+    total = 0
+
+    for _ in range(runs):
+        values = create_random_list(length, max)
+        Tree1 = RBTree()
+        Tree2 = BSTree()
+        for value in values:
+            Tree1.insert(value)
+            Tree2.insert(value)
+        total += Tree2.get_height() - Tree1.get_height() 
+    average_difference += total / runs
+
+    print("Number of Nodes = " + str(length))
+    print("Average Difference (BSTree Height - RBTree Height) = " + str(average_difference))
+
+def experiment1_2():
     lengths = [1,2,4,8,16,32,64,128,256]
     max = 10000
 
@@ -53,7 +75,7 @@ def experiment1():
     plt.ylabel('Average Height')
     plt.legend(['RBTree', 'BSTree'])
     plt.show()
-    
+
 def experiment2():
     swaps = [0,1,2,3,4,5,10,25,50,100]
     length = 50
@@ -114,7 +136,7 @@ def experiment4():
     plt.show()
 #formula:
 
-experiment4()
+experiment1_1()
 
 
 
