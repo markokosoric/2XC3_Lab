@@ -30,16 +30,13 @@
 
 #outline()
 
-#pagebreak()
-
-#outline(target: figure.where(kind: image))
+#outline(title: "Figures", target: figure.where(kind: image))
+#outline(title: "Tables", target: figure.where(kind: table))
 
 #pagebreak()
 
 = Executive Summary
 
-
-#pagebreak()
 
 #show figure.where(
   kind: image,
@@ -211,7 +208,9 @@ deterministic, only one tree was generated for each degree.
       [24], [121393],
       [25], [196418],
     )
-  )
+  ), caption: [
+    Number of nodes in a XC3 vs Degree
+  ]
 )
 
 The results show that the number of nodes for a tree of degree $i$ is the
