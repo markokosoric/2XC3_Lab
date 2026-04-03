@@ -127,13 +127,15 @@ because the order of values are more random.
 A X3Tree was generated for all degrees $i in NN_0$ where $0 <= i <= 25$. The
 height of the tree was recorded. Since X3Tree generation is deterministic, only
 one tree was generated for each degree.
-
 #figure(
   grid(
-    columns: 2, gutter: 4em,
+    columns: 2,
+    gutter: 4em,
     table(
       columns: 2,
-      stroke: none, column-gutter: 1em, row-gutter: -0.1em,
+      stroke: none,
+      column-gutter: 1em,
+      row-gutter: -0.1em,
       [*Degree*], [*Height*],
       table.hline(),
       [0], [1],
@@ -152,7 +154,9 @@ one tree was generated for each degree.
     ),
     table(
       columns: 2,
-      stroke: none, column-gutter: 1em, row-gutter: -0.1em,
+      stroke: none,
+      column-gutter: 1em,
+      row-gutter: -0.1em,
       [*Degree*], [*Nodes*],
       table.hline(),
       [13], [8],
@@ -168,10 +172,11 @@ one tree was generated for each degree.
       [23], [13],
       [24], [13],
       [25], [14],
-    )
-  ), caption: [
+    ),
+  ),
+  caption: [
     Height of XC3 vs Degree
-  ]
+  ],
 )
 
 For every increase of two to a X3Tree's degree, the height increases by one.
@@ -194,10 +199,13 @@ deterministic, only one tree was generated for each degree.
 
 #figure(
   grid(
-    columns: 2, gutter: 4em,
+    columns: 2,
+    gutter: 4em,
     table(
       columns: 2,
-      stroke: none, column-gutter: 1em, row-gutter: -0.1em,
+      stroke: none,
+      column-gutter: 1em,
+      row-gutter: -0.1em,
       [*Degree*], [*Nodes*],
       table.hline(),
       [0], [1],
@@ -216,7 +224,9 @@ deterministic, only one tree was generated for each degree.
     ),
     table(
       columns: 2,
-      stroke: none, column-gutter: 1em, row-gutter: -0.1em,
+      stroke: none,
+      column-gutter: 1em,
+      row-gutter: -0.1em,
       [*Degree*], [*Nodes*],
       table.hline(),
       [13], [610],
@@ -232,10 +242,11 @@ deterministic, only one tree was generated for each degree.
       [23], [75025],
       [24], [121393],
       [25], [196418],
-    )
-  ), caption: [
+    ),
+  ),
+  caption: [
     Number of nodes in a XC3 vs Degree
-  ]
+  ],
 )
 
 The results show that the number of nodes for a tree of degree $i$ is the
@@ -272,22 +283,22 @@ complexities are the same, $h(n)$ can be said to be in $O(log(n))$.
 For a more rigorous argument, Let $n$ denote the number of nodes, $d$ denote the
 degree, and $h$ denote the height. From the previous analysis,
 $
-  n(d) &= "Fib"(d) \
-  h(d) &= ceil(d/2) + 1
+  n(d) & = "Fib"(d) \
+  h(d) & = ceil(d/2) + 1
 $
 The height of a tree with respect to the number of nodes is given by the
 composition
 $
-  n(d) &= F(d) \
-  d(n) &= F^(-1)(n) \
-  h(d) &= G(d) \
-  h(n) &= G thick circle.small thick F^(-1) \
-  &=   (ceil(("Fib"^(-1)(n))/2) + 1)
+  n(d) & = F(d) \
+  d(n) & = F^(-1)(n) \
+  h(d) & = G(d) \
+  h(n) & = G thick circle.small thick F^(-1) \
+       & = (ceil(("Fib"^(-1)(n))/2) + 1)
 $
 Using the closed form for $"Fib"(n)$
 $
-  "Fib"(n) &= (phi^n + psi^n)/sqrt(5) \
-  &approx phi^n/sqrt(5) &wide "for large" n
+  "Fib"(n) & = (phi^n + psi^n)/sqrt(5) \
+           & approx phi^n/sqrt(5)      & wide "for large" n
 $
 Therefore
 $
@@ -295,10 +306,9 @@ $
 $
 Thus
 $
-  h(n) 
-  &= ceil(("Fib"^(-1)(n))/2) + 1 \
-  &= ceil((sqrt(5) log_phi (n))/2) + 1 \
-  &approx (sqrt(5))/2 log_phi (n) + 1
+  h(n) & = ceil(("Fib"^(-1)(n))/2) + 1 \
+       & = ceil((sqrt(5) log_phi (n))/2) + 1 \
+       & approx (sqrt(5))/2 log_phi (n) + 1
 $
 Therefore $h(n) in O(log_phi (n)) tilde.equiv O(log (n))$
 
