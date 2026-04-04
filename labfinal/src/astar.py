@@ -1,5 +1,5 @@
-from . import min_heap
-from labfinal.src.final_project_part1 import DirectedWeightedGraph
+import min_heap
+from final_project_part1 import DirectedWeightedGraph
 
 
 # From: https://en.wikipedia.org/wiki/A%2A_search_algorithm#Pseudocode
@@ -20,7 +20,7 @@ def a_star(G: DirectedWeightedGraph, s: int, d: int, h: dict[int, float]):
     while not Q.is_empty():
         current_element = Q.extract_min()
         current_node = current_element.value
-        if current_node == d: return pred
+        if current_node == d: return dist
 
         for neighbour in G.adj[current_node]:
             score = dist[current_node] + G.w(current_node, neighbour);
@@ -29,5 +29,5 @@ def a_star(G: DirectedWeightedGraph, s: int, d: int, h: dict[int, float]):
                 dist[neighbour] = score;
                 Q.decrease_key(neighbour, score + h[neighbour]);
 
-    return pred
+    return dist
 

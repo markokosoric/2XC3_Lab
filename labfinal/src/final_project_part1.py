@@ -1,4 +1,4 @@
-from . import min_heap
+import min_heap
 import random
 
 class DirectedWeightedGraph:

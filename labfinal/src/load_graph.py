@@ -1,6 +1,8 @@
 from math import sin,pi,sqrt
 
-from .final_project_part1 import DirectedWeightedGraph
+from graph import HeuristicGraph
+
+from final_project_part1 import DirectedWeightedGraph
 
 # metric tensor at the center of london
 def g(a: tuple[float,float], b: tuple[float,float]) -> float:
@@ -9,6 +11,7 @@ def g(a: tuple[float,float], b: tuple[float,float]) -> float:
 
 class LondonSubway:
     stations: dict[int, tuple[float, float]]
+    connections: dict[tuple[int, int], float]
     graph: DirectedWeightedGraph
 
     def __init__(self) -> None:
@@ -19,6 +22,7 @@ class LondonSubway:
 
         g: DirectedWeightedGraph = DirectedWeightedGraph()
         stations: dict[int, tuple[float, float]] = {};
+        connections: dict[tuple[int, int], float] = {};
 
         for l in fd_stations.readlines():
             f = l.split(',')
@@ -27,6 +31,7 @@ class LondonSubway:
 
         for c in fd_connect.readlines():
             f = c.split(',')
+            connections[(int(f[0]), int(f[1]))] = float(f[3]);
             g.add_edge(int(f[0]), int(f[1]), float(f[3]))
             g.add_edge(int(f[1]), int(f[0]), float(f[3]))
 
@@ -35,6 +40,7 @@ class LondonSubway:
         fd_connect.close();
         self.graph = g;
         self.stations = stations;
+        self.connections = connections
 
     def getHeuristic(self, node: int) -> dict[int, float]:
         h: dict[int, float] = {};
@@ -45,4 +51,13 @@ class LondonSubway:
 
         return h;
 
-print(LondonSubway().getHeuristic(1))
+    def make_heuristic_graph(self, dest: int) -> HeuristicGraph:
+        g = HeuristicGraph(self.getHeuristic(dest));
+        for i in self.stations:
+            g.add_node(i);
+        for n,m in self.connections.keys():
+            g.add_edge(n,m, self.connections[(n,m)])
+            g.add_edge(m,n, self.connections[(n,m)])
+        return g;
+
+print(LondonSubway().make_heuristic_graph(2))
