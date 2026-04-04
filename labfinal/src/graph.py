@@ -19,6 +19,9 @@ class Graph(ABC):
     @abstractmethod
     def w(self, node1: int, node2: int) -> float:
         pass
+    @abstractmethod
+    def get_nodes(self) -> list[int]: # not part of UML diagram but required for algo
+        pass
 
 class WeightedGraph(Graph):
     graph: DirectedWeightedGraph
@@ -41,6 +44,9 @@ class WeightedGraph(Graph):
     @override
     def w(self, node1: int, node2: int) -> float:
         return self.graph.w(node1, node2)
+    @override
+    def get_nodes(self) -> list[int]:
+        return list(self.graph.adj.keys());
 
 class HeuristicGraph(WeightedGraph):
     _heuristic: dict[int, float]

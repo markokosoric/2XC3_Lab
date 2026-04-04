@@ -60,4 +60,3 @@ class LondonSubway:
             g.add_edge(m,n, self.connections[(n,m)])
         return g;
 
-print(LondonSubway().make_heuristic_graph(2))
