@@ -229,3 +229,26 @@ where only a single shortest path from a start position to an end position needs
 to be calculated. In this example, heuristics such as Euclidean distance
 provides a good estimate of the remaining cost (distance). This allows A\* to
 reduce run time by exploring less unessecary nodes.
+
+= Part 3
+== Implementation
+The London subway stations loaded into a weighted directed graph through the
+use of a function that parses the stations and connections CSV. For each
+connection, an edge was inserted into the graph for both directions of travel.
+
+Since the size of London is relatively small compared to the earth, distances
+can be approximated by assuming that the surrounding area is flat without needed
+to take into account the curvature of the earth. Distances were calculated with
+respect to the metric tensor $g$ at London's center ($theta, phi = 51.5 degree,
+0.1 degree$). The heuristic $h$ was then calculated as the approximated distance
+  between the two stations.
+$
+  g = mat(
+    R^2, 0;
+    0, R^2 sin^2(theta)
+  ), wide h(bold(u), bold(v)) = sqrt(bold(u)^T g bold(v))
+$
+
+== Experiments
+TODO
+
