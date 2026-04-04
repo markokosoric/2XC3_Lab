@@ -252,3 +252,55 @@ $
 == Experiments
 TODO
 
+= Part 4
+== Refactoring
+The code was refactored to include classes `HeuristicGraph` which inherits from
+`WeightedGraph`. `WeightedGraph` inherits from an abstract base class `Graph`.
+Since both `Graph` and `WeightedGraph` include the method `w` with incompatible
+function signatures, we have decided to move the `w` function from
+`WeightedGraph` to `Graph` and keep the signature from `WeightedGraph`.
+Additionally, a new method `get_nodes() -> list[int]` was added since both
+Dijkstra and Bellman-Ford algorithm requires a list of all the nodes in the
+graph.
+
+The adapter pattern was applied to the shortest path algorithms since they
+required `DirectedWeightedGraph` but the graph representation was different. In
+these adapters, a `DirectedWeightedGraph` was generated based on the data
+obtainable from the `Graph` interface, then passed to their respective
+functions.
+
+== Robustness
+The current UML diagram puts functionality that is not very related into an
+"is-a" hierarchy of inheritance. The heuristic function is a function on pairs
+of edges in a graph that does not respect the edge structure. It makes no sense
+to put that in the inheritance hierarchy since this is a property of a set of
+nodes and not a thing that a graph is. To extend the UML diagram for robustness,
+we would make the heuristic into an interface that contains a function on two
+nodes that returns a float.
+
+```
+interface Heuristic
+  float h(int node1, int node2)
+```
+
+Additionally, if extra node data or edge data needs to be stored, the graph can
+be refactored into a generic/templated class with maps from nodes to node data
+and pairs of nodes to edge data. This allows for more data to be stored whilst
+keeping the safety of statically typed classes.
+
+For graphs with non-integer nodes, the facade pattern can be employed to make an
+external interface that takes different types and maps it to an integer for
+graph operations. At the end of a graph operation, the output is mapped back
+into the node's type. This method is preferable to templating the node's type
+since operations on non-integer types may take longer. These costlier operations
+happen in all graph algorithms whereas mapping to an integer and back is only
+done once.
+
+In the current iteration of `Graph` in the UML diagram, the only graphs that
+could implement `Graph` are graphs that have no node data and have either no
+edge data or edge data that is representable with a float. This means that
+undirected graph, weighted undirected graph, directed graph, and weighted
+undirected graph can all implement `Graph`. For the unweighted variants, the
+weight of an edge exists but is ignored.
+
+
