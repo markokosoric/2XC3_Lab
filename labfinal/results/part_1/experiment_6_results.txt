@@ -1,0 +1,6 @@
+No negative cycle
+mystery total = 12
+
+Negative cycle
+mystery total = -24
+
