@@ -1,40 +1,43 @@
-import min_heap
+from . import min_heap
 import random
 
 class DirectedWeightedGraph:
+    weights: dict[tuple[int, int], float]
+    adj: dict[int, list[int]]
 
     def __init__(self):
         self.adj = {}
         self.weights = {}
 
-    def are_connected(self, node1, node2):
+    def are_connected(self, node1: int, node2: int) -> bool:
         for neighbour in self.adj[node1]:
             if neighbour == node2:
                 return True
         return False
 
-    def adjacent_nodes(self, node):
+    def adjacent_nodes(self, node: int) -> list[int]:
         return self.adj[node]
 
-    def add_node(self, node):
+    def add_node(self, node: int):
         self.adj[node] = []
 
-    def add_edge(self, node1, node2, weight):
+    def add_edge(self, node1: int, node2: int, weight: float):
         if node2 not in self.adj[node1]:
             self.adj[node1].append(node2)
         self.weights[(node1, node2)] = weight
 
-    def w(self, node1, node2):
+    def w(self, node1: int, node2: int) -> float:
         if self.are_connected(node1, node2):
             return self.weights[(node1, node2)]
+        raise Exception("unknown weight")
 
-    def number_of_nodes(self):
+    def number_of_nodes(self) -> int:
         return len(self.adj)
 
 
-def dijkstra(G, source):
+def dijkstra(G: DirectedWeightedGraph, source: int) -> dict[int, float]:
     pred = {} #Predecessor dictionary. Isn't returned, but here for your understanding
-    dist = {} #Distance dictionary
+    dist: dict[int, float] = {} #Distance dictionary
     Q = min_heap.MinHeap([])
     nodes = list(G.adj.keys())
 
@@ -57,9 +60,9 @@ def dijkstra(G, source):
     return dist
 
 
-def bellman_ford(G, source):
+def bellman_ford(G: DirectedWeightedGraph, source: int) -> dict[int, float]:
     pred = {} #Predecessor dictionary. Isn't returned, but here for your understanding
-    dist = {} #Distance dictionary
+    dist: dict[int, float] = {} #Distance dictionary
     nodes = list(G.adj.keys())
 
     #Initialize distances
@@ -77,13 +80,13 @@ def bellman_ford(G, source):
     return dist
 
 
-def total_dist(dist):
-    total = 0
+def total_dist(dist: dict[int, float]) -> float:
+    total: float = 0
     for key in dist.keys():
         total += dist[key]
     return total
 
-def create_random_complete_graph(n,upper):
+def create_random_complete_graph(n:int, upper: int) -> DirectedWeightedGraph:
     G = DirectedWeightedGraph()
     for i in range(n):
         G.add_node(i)
@@ -95,7 +98,7 @@ def create_random_complete_graph(n,upper):
 
 
 #Assumes G represents its nodes as integers 0,1,...,(n-1)
-def mystery(G):
+def mystery(G: DirectedWeightedGraph) -> list[list[float]]:
     n = G.number_of_nodes()
     d = init_d(G)
     for k in range(n):
@@ -105,7 +108,7 @@ def mystery(G):
                     d[i][j] = d[i][k] + d[k][j]
     return d
 
-def init_d(G):
+def init_d(G: DirectedWeightedGraph) -> list[list[float]]:
     n = G.number_of_nodes()
     d = [[float("inf") for j in range(n)] for i in range(n)]
     for i in range(n):

@@ -1,16 +1,14 @@
-import csv
-from typing import Dict, Tuple
 from math import sin,pi,sqrt
 
-from final_project_part1 import DirectedWeightedGraph
+from .final_project_part1 import DirectedWeightedGraph
 
 # metric tensor at the center of london
-def g(a: Tuple[float,float], b: Tuple[float,float]) -> float:
+def g(a: tuple[float,float], b: tuple[float,float]) -> float:
     return a[0]*b[0] + a[1]*b[1]*sin(51.5072 * (pi/180))
 
 
 class LondonSubway:
-    stations: Dict[int, tuple[float, float]]
+    stations: dict[int, tuple[float, float]]
     graph: DirectedWeightedGraph
 
     def __init__(self) -> None:
@@ -20,7 +18,7 @@ class LondonSubway:
         _ = fd_connect.readline();
 
         g: DirectedWeightedGraph = DirectedWeightedGraph()
-        stations: Dict[int, tuple[float, float]] = {};
+        stations: dict[int, tuple[float, float]] = {};
 
         for l in fd_stations.readlines():
             f = l.split(',')
@@ -38,8 +36,8 @@ class LondonSubway:
         self.graph = g;
         self.stations = stations;
 
-    def getHeuristic(self, node: int) -> Dict[int, float]:
-        h: Dict[int, float] = {};
+    def getHeuristic(self, node: int) -> dict[int, float]:
+        h: dict[int, float] = {};
         dest = self.stations[node]
         for n in self.stations.keys():
             delta = (self.stations[n][0] - dest[0], self.stations[n][1] - dest[1])

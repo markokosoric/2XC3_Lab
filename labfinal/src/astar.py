@@ -1,12 +1,11 @@
-from typing import Dict
-from labfinal.src import min_heap
+from . import min_heap
 from labfinal.src.final_project_part1 import DirectedWeightedGraph
 
 
 # From: https://en.wikipedia.org/wiki/A%2A_search_algorithm#Pseudocode
-def a_star(G: DirectedWeightedGraph, s: int, d: int, h: Dict[int, float]):
-    pred = {}
-    dist: Dict[int,float] = {} #Distance dictionary
+def a_star(G: DirectedWeightedGraph, s: int, d: int, h: dict[int, float]):
+    pred: dict[int, int] = {}
+    dist: dict[int,float] = {} #Distance dictionary
 
     Q = min_heap.MinHeap([])
 
@@ -23,9 +22,8 @@ def a_star(G: DirectedWeightedGraph, s: int, d: int, h: Dict[int, float]):
         current_node = current_element.value
         if current_node == d: return pred
 
-        dist[current_node] = current_element.key
         for neighbour in G.adj[current_node]:
-            score = dist[current_node] + float(G.w(current_node, neighbour));
+            score = dist[current_node] + G.w(current_node, neighbour);
             if score < dist[neighbour]:
                 pred[neighbour] = current_node
                 dist[neighbour] = score;
