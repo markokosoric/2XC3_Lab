@@ -199,14 +199,33 @@ algorithm chooses the node with minimum cost:
 $ f(n) = g(n) + h(n) $
 
 where n is the next node on the path, g(n) is the cost of the cheapest path from
-the start node to n and h(n) is an estimate from the heuristic function of the
-path from n to the end node.
+the source node to n and h(n) is an estimate from the heuristic function of the
+path from n to the target node.
 
 The issue with Dijkstra's algorithm is that it only explores nodes based on
-the current distance from the start node. This can be inefficient because the
+the current distance from the source node. This can be inefficient because the
 algorithm will explore unessecarly costly paths. The A\* algorithm addresses
 this issue by incorporating a heuristic function that estimates the remaining
-distance to the end node. By prioritizing nodes with a minimal
-$f(n) = g(n) + h(n)$, it directs the search towards the end node and reduces the
-amount of unessecary exploration.
+distance to the target node. By prioritizing nodes with a minimal
+$f(n) = g(n) + h(n)$, it directs the search towards the target node and reduces
+the amount of unessecary exploration.
 
+To empirically compare Dijkstra's and A\*'s algorithm's, both algorithms should
+be run on the same set of graphs with the same source and target nodes. Relevant
+things to measure include, running time, number of nodes explored, the
+number of relaxations done, and performance of different heuristics. Multiple
+runs should be done for each independent variable to get consistent and reliable
+averages.
+
+If the heuristic was randomly generated, it would not provide useful guidance
+towards the target node. In this case, A\* algorithm would perform similar or
+worse to Dijkstra's algorithm as it's choice in the next node to explore will
+be almost random. A bad heuristic function means the algorithm will explore more
+unessecary nodes and do more relaxations thus reducing performance.
+
+A\* algorithm is preferred when a fraction of the nodes need to be examined and
+a good heuristic is provided. A common example is in GPS navigation systems
+where only a single shortest path from a start position to an end position needs
+to be calculated. In this example, heuristics such as Euclidean distance
+provides a good estimate of the remaining cost (distance). This allows A\* to
+reduce run time by exploring less unessecary nodes.
