@@ -190,4 +190,23 @@ Also, note that while Dijkstra's solution has the same time complexity
 as Floyd-Marshall's, Dijkstra's solution does not work with negative edge
 weights and Floyd-Marshall's does.
 
+= Part 2
+
+A\* is a shortest path algorithm that extends Dijkstra's algorithm by using a
+heuristic function to guide the search towards the shortest path. The A\*
+algorithm chooses the node with minimum cost:
+
+$ f(n) = g(n) + h(n) $
+
+where n is the next node on the path, g(n) is the cost of the cheapest path from
+the start node to n and h(n) is an estimate from the heuristic function of the
+path from n to the end node.
+
+The issue with Dijkstra's algorithm is that it only explores nodes based on
+the current distance from the start node. This can be inefficient because the
+algorithm will explore unessecarly costly paths. The A\* algorithm addresses
+this issue by incorporating a heuristic function that estimates the remaining
+distance to the end node. By prioritizing nodes with a minimal
+$f(n) = g(n) + h(n)$, it directs the search towards the end node and reduces the
+amount of unessecary exploration.
 
