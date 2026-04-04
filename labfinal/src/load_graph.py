@@ -42,17 +42,17 @@ class LondonSubway:
         self.stations = stations;
         self.connections = connections
 
-    def getHeuristic(self, node: int) -> dict[int, float]:
+    def getHeuristic(self, node: int, strength: float = 1.0) -> dict[int, float]:
         h: dict[int, float] = {};
         dest = self.stations[node]
         for n in self.stations.keys():
             delta = (self.stations[n][0] - dest[0], self.stations[n][1] - dest[1])
-            h[n] = sqrt(g(delta, delta))
+            h[n] = strength * sqrt(g(delta, delta))
 
         return h;
 
-    def make_heuristic_graph(self, dest: int) -> HeuristicGraph:
-        g = HeuristicGraph(self.getHeuristic(dest));
+    def make_heuristic_graph(self, dest: int, strength: float = 1.0) -> HeuristicGraph:
+        g = HeuristicGraph(self.getHeuristic(dest, strength));
         for i in self.stations:
             g.add_node(i);
         for n,m in self.connections.keys():
