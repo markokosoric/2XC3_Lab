@@ -6,7 +6,7 @@ from final_project_part1 import DirectedWeightedGraph
 
 # metric tensor at the center of london
 def g(a: tuple[float,float], b: tuple[float,float]) -> float:
-    return a[0]*b[0] + a[1]*b[1]*sin(51.5072 * (pi/180))
+    return a[0]*b[0] + a[1]*b[1]*pow(sin(51.5072 * (pi/180)), 2)
 
 
 class LondonSubway:
