@@ -256,7 +256,7 @@ $
 
 == Experiments
 
-= Experiment 1
+=== Experiment 1
 
 This experiment investigates the difference in running time between Dijkstra's
 algorithm and A\* star algorithm on the London subway data. The set of all
@@ -276,7 +276,7 @@ calculating routes from one stop to another. London's Subway goes into many
 different directions while having many intersections. This means that the A\*
 algorithm will benefit a lot from not having to check many unnecessary routes.
 
-= Experiment 2
+=== Experiment 2
 
 This experiment investigates the difference in running time between Dijkstra's
 algorithm and the A\* algorithm for trips on the same line on the London Subway
@@ -297,7 +297,7 @@ the same line. This makes sense because the route is more direct. This allows
 A\* star algorithm to focus on one path while Dijkstra's can veer off into other
 directions once an intersection is encountered.
 
-= Experiment 3
+=== Experiment 3
 
 This experiment investigates the difference in running time between Dijkstra's
 algorithm and the A\* algorithm for trips with on adjacent lines. Three
@@ -314,7 +314,7 @@ average running time of both were recorded and plotted on to a graph.
 
 The A\* algorithm once again beats Dijkstra's algorithm in performance.
 
-= Experiment 4
+=== Experiment 4
 
 This experiment investigates the running time between Dijkstra's algorithm and
 the A\* algorithm for trips requiring several transfers. Three
