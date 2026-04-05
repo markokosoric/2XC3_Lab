@@ -1,0 +1,9 @@
+Belsize Park (22) -> Bond Street (28)
+Dijkstra average running time (ms) = 1.2102866300847381
+A* average running time (ms) = 0.19102232216391712
+Blackhorse Road (26) -> Paddington (193)
+Dijkstra average running time (ms) = 1.2291244394727983
+A* average running time (ms) = 0.45109436876373366
+Balham (12) -> Green Park (107)
+Dijkstra average running time (ms) = 1.24398403451778
+A* average running time (ms) = 0.20738104567863047

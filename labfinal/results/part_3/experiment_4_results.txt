@@ -1,0 +1,9 @@
+Aldgate (2) -> New Cross Gate (175)
+Dijkstra average running time (ms) = 1.216341085266322
+A* average running time (ms) = 0.4384316853247583
+Blackhorse Road (26) -> Shadwell (225)
+Dijkstra average running time (ms) = 1.2243318760301918
+A* average running time (ms) = 0.37625126558123156
+Covent Garden (60) -> Surrey Quays (253)
+Dijkstra average running time (ms) = 1.230803951562848
+A* average running time (ms) = 0.47878707404015586

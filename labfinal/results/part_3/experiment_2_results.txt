@@ -1,0 +1,9 @@
+Arnos Grove (9) -> Covent Garden (60)
+Dijkstra average running time (ms) = 1.1892710438696668
+A* average running time (ms) = 0.2249579319031909
+Angel (7) -> Clapham South (56)
+Dijkstra average running time (ms) = 1.2053478072048165
+A* average running time (ms) = 0.7532121954718605
+Barkingside (16) -> Bethnal Green (24)
+Dijkstra average running time (ms) = 1.1759583610692061
+A* average running time (ms) = 0.21033558790804818

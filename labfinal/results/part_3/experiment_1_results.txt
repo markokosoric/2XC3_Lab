@@ -1,0 +1,6 @@
+<graph.HeuristicGraph object at 0x11b92f4d0>
+number of stations = 302
+number of source-target pairs = 90902
+Average Dijkstra running time (ms) = 1.2075060256525554
+Average A* running time (ms) = 0.7091109350362599
+Shortest-path mismatches = 0

@@ -204,11 +204,11 @@ path from n to the target node.
 
 The issue with Dijkstra's algorithm is that it only explores nodes based on
 the current distance from the source node. This can be inefficient because the
-algorithm will explore unessecarly costly paths. The A\* algorithm addresses
+algorithm will explore unnecessarily costly paths. The A\* algorithm addresses
 this issue by incorporating a heuristic function that estimates the remaining
 distance to the target node. By prioritizing nodes with a minimal
 $f(n) = g(n) + h(n)$, it directs the search towards the target node and reduces
-the amount of unessecary exploration.
+the amount of unnecessary exploration.
 
 To empirically compare Dijkstra's and A\*'s algorithm's, both algorithms should
 be run on the same set of graphs with the same source and target nodes. Relevant
@@ -221,14 +221,14 @@ If the heuristic was randomly generated, it would not provide useful guidance
 towards the target node. In this case, A\* algorithm would perform similar or
 worse to Dijkstra's algorithm as it's choice in the next node to explore will
 be almost random. A bad heuristic function means the algorithm will explore more
-unessecary nodes and do more relaxations thus reducing performance.
+unnecessary nodes and do more relaxations thus reducing performance.
 
 A\* algorithm is preferred when a fraction of the nodes need to be examined and
 a good heuristic is provided. A common example is in GPS navigation systems
 where only a single shortest path from a start position to an end position needs
 to be calculated. In this example, heuristics such as Euclidean distance
 provides a good estimate of the remaining cost (distance). This allows A\* to
-reduce run time by exploring less unessecary nodes.
+reduce run time by exploring less unnecessary nodes.
 
 = Part 3
 == Implementation
@@ -241,7 +241,7 @@ can be approximated by assuming that the surrounding area is flat without needed
 to take into account the curvature of the earth. Distances were calculated with
 respect to the metric tensor $g$ at London's center ($theta, phi = 51.5 degree,
 0.1 degree$). The heuristic $h$ was then calculated as the approximated distance
-  between the two stations.
+between the two stations.
 $
   g = mat(
     R^2, 0;
@@ -250,7 +250,85 @@ $
 $
 
 == Experiments
-TODO
+
+= Experiment 1
+
+This experiment investigates the difference in running time between Dijkstra's
+algorithm and A\* star algorithm on the London subway data. The set of all
+possible source and target node pairs were generated. These pairs were used to
+calculate the running time of both algorithms. The average running time of all
+pairs was plotted as function of Dijkstra's algorithm or A\* algorithm.
+
+#figure(
+  image("results/part_3/experiment_1_graph.png"),
+  caption: [
+    Plot of Average Runtime on London Graph
+  ],
+)
+
+The results demonstrate that A\* algorithm outperforms Dijkstra's when
+calculating routes from one stop to another. London's Subway goes into many
+different directions while having many intersections. This means that the A\*
+algorithm will benefit a lot from not having to check many unnecessary routes.
+
+= Experiment 2
+
+This experiment investigates the difference in running time between Dijkstra's
+algorithm and the A\* algorithm for trips on the same line on the London Subway
+map. Three source and target node pairs were selected that meet the criteria.
+For each pair, Dijkstra's and A\* algorithm were run 1000 times each. The
+average running time of both were recorded and plotted on to a graph.
+
+#figure(
+  image("results/part_3/experiment_2_graph.png"),
+  caption: [
+    Plot of Runtime for Trips on the Same Line
+  ],
+)
+
+The runtime for A\* algorithm is lower than the one for Dijkstra's. These
+results indicate that A\* performs better than Dijkstra's algorithm for trips on
+the same line. This makes sense because the route is more direct. This allows
+A\* star algorithm to focus on one path while Dijkstra's can veer off into other
+directions once an intersection is encountered.
+
+= Experiment 3
+
+This experiment investigates the difference in running time between Dijkstra's
+algorithm and the A\* algorithm for trips with on adjacent lines. Three
+source and target node pairs were selected that meet the criteria.
+For each pair, Dijkstra's and A\* algorithm were run 1000 times each. The
+average running time of both were recorded and plotted on to a graph.
+
+#figure(
+  image("results/part_3/experiment_3_graph.png"),
+  caption: [
+    Plot of Runtime for Trips on Adjacent Lines
+  ],
+)
+
+The A\* algorithm once again beats Dijkstra's algorithm in performance.
+
+= Experiment 4
+
+This experiment investigates the running time between Dijkstra's algorithm and
+the A\* algorithm for trips requiring several transfers. Three
+source and target node pairs were selected that meet the criteria.
+For each pair, Dijkstra's and A\* algorithm were run 1000 times each. The
+average running time of both were recorded and plotted on to a graph.
+
+#figure(
+  image("results/part_3/experiment_4_graph.png"),
+  caption: [
+    Plot of Runtime for Trips Requiring Several Transfers
+  ],
+)
+
+The A\* algorithm has a lower run time compared to Dijkstra's algorithm.
+However, the performance difference between the two algorithms are smaller. The
+superiority of the A\* algorithm is expected because it uses a Heuristic
+function to estimate the shortest paths, reducing the amount of nodes it
+needs to check.
 
 = Part 4
 == Refactoring
