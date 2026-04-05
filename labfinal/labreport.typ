@@ -31,11 +31,17 @@
 #outline()
 
 #outline(title: "Figures", target: figure.where(kind: image))
-#outline(title: "Tables", target: figure.where(kind: table))
 
 #pagebreak()
 
 = Executive Summary
+- Both Dijkstra and Bellman-Ford approximations worked worse at low relaxation
+  values and better at high relaxation values.
+- Bellman-Ford running time is worse than Dijkstra running time
+- The Dijkstra algorithm approximation is faster than the Bellman-Ford
+  approximated and they are both faster than their non-approximated counterparts
+- The mystery algorithm is the Floyd–Warshall algorithm
+- A\* was found to be perform consistently faster when compared to dijkstra
 
 #pagebreak()
 
@@ -146,7 +152,6 @@ increases. This is expected because it requires fewer relaxations than
 Bellman-Ford's. This experiment highlights how relaxations can affect runtimes.
 
 == Mystery Algorithm
-
 If correctness is the only concern, then all-pairs shortest path algorithm's for
 graphs with non-negative edge weights can be computed by running Dijkstra's
 algorithm once from every vertex. Since Dijkstra's algorithm is $Theta (V^2)$
@@ -176,19 +181,19 @@ $Theta (V^3)$, so it is dominated by the nested loops.
   ],
 )
 
-The mystery function is Floyd-Marshall's algorithm, which computes the shortest
+The mystery function is Floyd-Warshall's algorithm, which computes the shortest
 path distance between every pair of vertices in graph. This algorithm sticks out
 because it uses a matrix to represent the distances between nodes, and it uses a
-triple nested loop. Also, Floyd-Marshall's algorithm does not work with negative
+triple nested loop. Also, Floyd-Warshall's algorithm does not work with negative
 cycles. The graph in figure six tells us the algorithm is
-Floyd-Marshall's because it clearly does not give the correct total distance for
+Floyd-Warshall's because it clearly does not give the correct total distance for
 graphs with negative cycles. The time complexity of this algorithm is $O (V^3)$.
 This is not surprising given the graph from Figure 5. It is important to note
 that this algorithm performs better than Bellman-Ford's all-pairs shortest path
-solution but Floyd-Marshall's does not work with negative cycles.
+solution but Floyd-Warshall's does not work with negative cycles.
 Also, note that while Dijkstra's solution has the same time complexity
-as Floyd-Marshall's, Dijkstra's solution does not work with negative edge
-weights and Floyd-Marshall's does.
+as Floyd-Warshall's, Dijkstra's solution does not work with negative edge
+weights and Floyd-Warshall's does.
 
 = Part 2
 
@@ -381,4 +386,21 @@ undirected graph, weighted undirected graph, directed graph, and weighted
 undirected graph can all implement `Graph`. For the unweighted variants, the
 weight of an edge exists but is ignored.
 
-
+= Appendix
+== Code Structure
+- Source code is in the `src` subdirectory
+  - `src/final_project_part1.py` contains code for dijkstra, bellman-ford, and
+    approximations.
+  - `src/astar.py` contains the code for A\*
+  - `src/graph.py` contains refactored graph datastructures
+  - `src/shortest_path.py` contains refactored shortest path algorithms
+  - `src/load_graph.py` contains code to load and convert the london subway data
+- Data is stored in `data`
+  - `data/london_stations.csv` and `data/london_connections.csv` contain data
+    about london's subways
+- Experiment results is in `results`
+  - `results/part_*/` contain experiment results for a specific experiment suite
+    - Inside this directory are results for experiments. Experiment result files
+      start with the experiment number and end in what type of result is.
+      - `*_graph.png` represent image results
+      - `*_results.txt` represent textual results
